@@ -1,11 +1,16 @@
 // =============================================================
 // DroneBody.cs — Drone physics + controller bridge
-// Drop into: Assets/Scripts/Drone/
 //
 // Attach to the drone GameObject (needs Rigidbody).
 // In the Inspector, drag in either PIDDroneController or
 // the ML-Agents PPODroneController as the "controller" field.
 // Everything else stays identical.
+//
+// Motor dynamics pipeline:
+//   Controller output (absolute target [-1,1])
+//     → Slew-rate limiter (prevents instant jumps)
+//     → First-order low-pass filter (motor response lag)
+//     → Force application at motor positions
 // =============================================================
 
 using UnityEngine;
@@ -18,17 +23,31 @@ public class DroneBody : MonoBehaviour
     // ─────────────────────────────────────────────
 
     [Header("Physics")]
-    [Tooltip("Max thrust per motor in Newtons")]
-    public float maxThrustPerMotor = 5f;
+    [Tooltip("Max thrust per motor in Newtons (set so hover ~50% for maneuvering room)")]
+    public float maxThrustPerMotor = 7.5f;
 
-    [Tooltip("Motor positions relative to center of mass (local space)")]
+    [Tooltip("Motor positions relative to center of mass (local space). Matches Jess's drone geometry.")]
     public Vector3[] motorPositions = new Vector3[]
     {
-        new Vector3(-0.25f, 0f,  0.25f),  // 0: Front-Left
-        new Vector3( 0.25f, 0f,  0.25f),  // 1: Front-Right
-        new Vector3(-0.25f, 0f, -0.25f),  // 2: Rear-Left
-        new Vector3( 0.25f, 0f, -0.25f),  // 3: Rear-Right
+        new Vector3(-0.88f, 0.60f,  0.88f),  // 0: Front-Left
+        new Vector3( 0.88f, 0.60f,  0.88f),  // 1: Front-Right
+        new Vector3(-0.88f, 0.60f, -0.88f),  // 2: Rear-Left
+        new Vector3( 0.88f, 0.60f, -0.88f),  // 3: Rear-Right
     };
+
+    [Header("Motor Dynamics")]
+    [Tooltip("Max thrust change per second (normalized). Lower = smoother, less oscillation.")]
+    public float maxThrustDeltaRate = 2.0f;
+
+    [Tooltip("Motor response time constant in seconds (first-order lag). Matches real motor inertia.")]
+    public float motorLagTimeConstant = 0.05f;
+
+    [Header("Aerodynamics")]
+    [Tooltip("Linear drag coefficient applied to velocity")]
+    public float linearDragCoeff = 0.5f;
+
+    [Tooltip("Angular drag coefficient applied to angular velocity")]
+    public float angularDragCoeff = 2.0f;
 
     [Header("Motor Health")]
     [Tooltip("Set to false to simulate motor failure")]
@@ -48,50 +67,72 @@ public class DroneBody : MonoBehaviour
     private Rigidbody _rb;
     private IDroneController _controller;
     private float[] _lastMotorOutputs = new float[4];
+    private float[] _currentThrusts = new float[4];  // after slew-rate limit
+    private float[] _actualThrusts = new float[4];   // after low-pass filter
+    private float _episodeTime;
+
+    /// <summary>
+    /// Current motor outputs (post-lag). Use for visual effects (rotor spin).
+    /// </summary>
+    public float[] MotorOutputs => _lastMotorOutputs;
 
     void Awake()
-{
-    _rb = GetComponent<Rigidbody>();
-    _rb.useGravity = true;
-
-    _controller = GetComponent<IDroneController>();
-    if (_controller == null)
     {
-        Debug.LogError("[DroneBody] No IDroneController found on this GameObject!");
-    }
+        _rb = GetComponent<Rigidbody>();
+        _rb.useGravity = true;
 
-    _controller?.Initialize(BuildConfig());
-}
+        _controller = GetComponent<IDroneController>();
+        if (_controller == null)
+        {
+            Debug.LogError("[DroneBody] No IDroneController found on this GameObject!");
+        }
+
+        _controller?.Initialize(BuildConfig());
+    }
 
     void FixedUpdate()
     {
         if (_controller == null) return;
 
+        _episodeTime += Time.fixedDeltaTime;
+
         // Build state snapshot
         DroneState state = BuildState();
 
-        // Ask controller for motor commands
-        float[] thrusts = _controller.ComputeMotorThrusts(state);
-        _lastMotorOutputs = thrusts;
+        // Ask controller for motor commands (absolute targets in [-1, 1])
+        float[] targetThrusts = _controller.ComputeMotorThrusts(state);
 
-        // Apply forces at motor positions
+        // Motor dynamics pipeline
         for (int i = 0; i < 4; i++)
         {
             if (!motorsActive[i])
             {
-                thrusts[i] = 0f; // double-check: body also enforces mask
+                _currentThrusts[i] = 0f;
+                _actualThrusts[i] = 0f;
+                continue;
             }
 
-            // Convert normalized [-1, 1] to Newtons
-            float forceN = thrusts[i] * maxThrustPerMotor;
+            // Stage 1: Slew-rate limiter (prevents instant thrust jumps / oscillation)
+            float delta = targetThrusts[i] - _currentThrusts[i];
+            float maxDelta = maxThrustDeltaRate * Time.fixedDeltaTime;
+            delta = Mathf.Clamp(delta, -maxDelta, maxDelta);
+            _currentThrusts[i] = Mathf.Clamp(_currentThrusts[i] + delta, -1f, 1f);
 
-            // Apply thrust in the motor's local "up" direction
+            // Stage 2: First-order low-pass filter (motor response lag)
+            float alpha = Time.fixedDeltaTime / motorLagTimeConstant;
+            _actualThrusts[i] = Mathf.Lerp(_actualThrusts[i], _currentThrusts[i], alpha);
+
+            // Stage 3: Apply force at motor position
+            float forceN = _actualThrusts[i] * maxThrustPerMotor;
             Vector3 worldMotorPos = transform.TransformPoint(motorPositions[i]);
-            Vector3 forceDir = transform.up;
-
-            _rb.AddForceAtPosition(forceDir * forceN, worldMotorPos,
-                ForceMode.Force);
+            _rb.AddForceAtPosition(transform.up * forceN, worldMotorPos, ForceMode.Force);
         }
+
+        _lastMotorOutputs = (float[])_actualThrusts.Clone();
+
+        // Apply aerodynamic drag (matches Jess's physics model)
+        _rb.AddForce(-linearDragCoeff * _rb.velocity);
+        _rb.AddTorque(-angularDragCoeff * _rb.angularVelocity);
     }
 
     // ─────────────────────────────────────────────
@@ -102,8 +143,7 @@ public class DroneBody : MonoBehaviour
     {
         // Altitude via raycast
         float alt = 0f;
-        if (Physics.Raycast(transform.position, Vector3.down, out RaycastHit hit,
-            100f))
+        if (Physics.Raycast(transform.position, Vector3.down, out RaycastHit hit, 100f))
         {
             alt = hit.distance;
         }
@@ -116,9 +156,10 @@ public class DroneBody : MonoBehaviour
             eulerAngles = transform.eulerAngles,
             position = transform.position,
             motorsActive = (bool[])motorsActive.Clone(),
-            currentMotorOutputs = (float[])_lastMotorOutputs.Clone(),
+            currentMotorOutputs = (float[])_actualThrusts.Clone(),
             targetVelocity = targetVelocity,
             altitude = alt,
+            episodeTime = _episodeTime,
         };
     }
 
@@ -131,6 +172,8 @@ public class DroneBody : MonoBehaviour
             motorPositions = motorPositions,
             armLength = motorPositions[0].magnitude,
             dt = Time.fixedDeltaTime,
+            motorLagTimeConstant = motorLagTimeConstant,
+            maxThrustDeltaRate = maxThrustDeltaRate,
         };
     }
 
@@ -160,11 +203,17 @@ public class DroneBody : MonoBehaviour
     }
 
     /// <summary>
-    /// Reset all motors to active (episode reset).
+    /// Reset all motors and episode state.
     /// </summary>
     public void ResetMotors()
     {
-        for (int i = 0; i < 4; i++) motorsActive[i] = true;
+        for (int i = 0; i < 4; i++)
+        {
+            motorsActive[i] = true;
+            _currentThrusts[i] = 0f;
+            _actualThrusts[i] = 0f;
+        }
+        _episodeTime = 0f;
         _controller?.OnEpisodeReset();
     }
 
@@ -194,5 +243,14 @@ public class DroneBody : MonoBehaviour
                     worldPos + transform.up * _lastMotorOutputs[i] * 0.5f);
             }
         }
+    }
+
+    void OnGUI()
+    {
+        if (!drawMotorForces) return;
+        GUI.Label(new Rect(10, Screen.height - 60, 500, 25),
+            $"Target vel: {targetVelocity:F2} | Actual vel: {_rb?.velocity:F2}");
+        GUI.Label(new Rect(10, Screen.height - 35, 500, 25),
+            $"Motors: [{_actualThrusts[0]:F2}, {_actualThrusts[1]:F2}, {_actualThrusts[2]:F2}, {_actualThrusts[3]:F2}]");
     }
 }

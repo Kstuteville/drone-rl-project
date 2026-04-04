@@ -1,6 +1,5 @@
 // =============================================================
 // IDroneController.cs — Shared interface for PPO and PID
-// Drop into: Assets/Scripts/Controllers/
 //
 // CRITICAL CONTRACT: This file defines the boundary between
 // the planner (what the drone wants to do) and the controller
@@ -35,7 +34,7 @@ public struct DroneState
     /// Index: 0=FrontLeft, 1=FrontRight, 2=RearLeft, 3=RearRight
     public bool[] motorsActive;
 
-    /// Current normalized thrust output per motor [-1, 1]
+    /// Current actual thrust output per motor [-1, 1] (post motor-lag filter)
     public float[] currentMotorOutputs;
 
     /// Target velocity from the shared planner (world-space, m/s)
@@ -43,20 +42,24 @@ public struct DroneState
 
     /// Altitude above ground (raycast down)
     public float altitude;
+
+    /// Time elapsed in current episode (for curriculum learning)
+    public float episodeTime;
 }
 
 /// <summary>
 /// Every controller — PPO or PID — implements this interface.
 /// The DroneBody calls ComputeMotorThrusts() in FixedUpdate and
-/// applies the returned values as Rigidbody forces. Swapping
-/// controllers is a single-line change.
+/// applies the returned values through a motor dynamics pipeline
+/// (slew-rate limiter → low-pass filter → force application).
+/// Swapping controllers is a single-line change.
 /// </summary>
 public interface IDroneController
 {
     /// <summary>
     /// Given the current drone state, return 4 normalized thrust
-    /// values in [-1, 1]. The DroneBody maps these to actual
-    /// Newton forces via: force = thrust * maxThrustPerMotor.
+    /// target values in [-1, 1]. DroneBody applies slew-rate limiting
+    /// and motor lag before converting to forces.
     /// </summary>
     float[] ComputeMotorThrusts(DroneState state);
 
@@ -95,4 +98,10 @@ public struct DroneConfig
 
     /// Physics timestep (should match Unity's fixedDeltaTime)
     public float dt;
+
+    /// Motor response time constant in seconds (first-order lag)
+    public float motorLagTimeConstant;
+
+    /// Max thrust change per second (slew-rate limit)
+    public float maxThrustDeltaRate;
 }
