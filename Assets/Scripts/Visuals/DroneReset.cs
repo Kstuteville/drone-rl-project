@@ -23,7 +23,6 @@ public class DroneReset : MonoBehaviour
 
     void Update()
     {
-        // T + Space to reset (either key held first)
         if (Input.GetKey(KeyCode.T) && Input.GetKeyDown(KeyCode.Space) ||
             Input.GetKey(KeyCode.Space) && Input.GetKeyDown(KeyCode.T))
         {
@@ -35,9 +34,10 @@ public class DroneReset : MonoBehaviour
     {
         rb.velocity = Vector3.zero;
         rb.angularVelocity = Vector3.zero;
-        transform.position = new Vector3(transform.position.x, startPosition.y, transform.position.z);
+        transform.position = startPosition; // fixed — resets ALL axes
         transform.rotation = Quaternion.identity;
-
         droneBody?.ResetMotors();
     }
+
+    
 }

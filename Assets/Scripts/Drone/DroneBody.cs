@@ -77,24 +77,43 @@ public class DroneBody : MonoBehaviour
     public float[] MotorOutputs => _lastMotorOutputs;
 
     void Awake()
+{
+    _rb = GetComponent<Rigidbody>();
+    _rb.useGravity = true;
+    
+    // Force zero thrust on start
+    for (int i = 0; i < 4; i++)
     {
-        _rb = GetComponent<Rigidbody>();
-        _rb.useGravity = true;
-
-        _controller = GetComponent<IDroneController>();
-        if (_controller == null)
-        {
-            Debug.LogError("[DroneBody] No IDroneController found on this GameObject!");
-        }
-
-        _controller?.Initialize(BuildConfig());
+        _currentThrusts[i] = 0f;
+        _actualThrusts[i] = 0f;
+        _lastMotorOutputs[i] = 0f;
     }
+    
+    _controller = GetComponent<IDroneController>();
+    if (_controller == null)
+        Debug.LogError("[DroneBody] No IDroneController found on this GameObject!");
+
+    _controller?.Initialize(BuildConfig());
+}
+
+void Start()
+{
+    Debug.Log($"Starting velocity: {_rb.velocity}");
+    Debug.Log($"Starting position: {transform.position}");
+
+    _rb.velocity = Vector3.zero;
+    _rb.angularVelocity = Vector3.zero;
+    Debug.Log($"Starting velocity: {_rb.velocity}");
+    Debug.Log($"Starting position: {transform.position}");
+}
 
     void FixedUpdate()
     {
         if (_controller == null) return;
 
         _episodeTime += Time.fixedDeltaTime;
+        
+         
 
         // Build state snapshot
         DroneState state = BuildState();
@@ -127,6 +146,8 @@ public class DroneBody : MonoBehaviour
             Vector3 worldMotorPos = transform.TransformPoint(motorPositions[i]);
             _rb.AddForceAtPosition(transform.up * forceN, worldMotorPos, ForceMode.Force);
         }
+
+    
 
         _lastMotorOutputs = (float[])_actualThrusts.Clone();
 

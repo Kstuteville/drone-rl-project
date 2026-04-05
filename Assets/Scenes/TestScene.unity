@@ -1404,9 +1404,10 @@ GameObject:
   - component: {fileID: 2072273953}
   - component: {fileID: 2072273952}
   - component: {fileID: 2072273957}
-  - component: {fileID: 2072273956}
   - component: {fileID: 2072273955}
   - component: {fileID: 2072273954}
+  - component: {fileID: 2072273959}
+  - component: {fileID: 2072273958}
   m_Layer: 0
   m_Name: Drone
   m_TagString: Untagged
@@ -1494,41 +1495,6 @@ MonoBehaviour:
   dodgeInterval: 1.5
   motorToKill: 0
   failureDelay: 5
---- !u!114 &2072273956
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2072273951}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d661dc131dc78499aa26ee094fdcc305, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  velocityXZ:
-    kP: 2
-    kI: 0.1
-    kD: 0.5
-  velocityY:
-    kP: 3
-    kI: 0.2
-    kD: 0.8
-  rollGains:
-    kP: 4
-    kI: 0.05
-    kD: 1.5
-  pitchGains:
-    kP: 4
-    kI: 0.05
-    kD: 1.5
-  yawGains:
-    kP: 2
-    kI: 0
-    kD: 0.5
-  maxTiltAngle: 30
-  maxYawRate: 90
-  integralClamp: 5
 --- !u!114 &2072273957
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1554,6 +1520,52 @@ MonoBehaviour:
   motorsActive: 01010101
   targetVelocity: {x: 0, y: 0, z: 0}
   drawMotorForces: 1
+--- !u!114 &2072273958
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2072273951}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d9702136082984bda9ea639c1faa20c3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  agentParameters:
+    maxStep: 0
+  hasUpgradedFromAgentParameters: 1
+  MaxStep: 0
+--- !u!114 &2072273959
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2072273951}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5d1c4e0b1822b495aa52bc52839ecb30, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_BrainParameters:
+    VectorObservationSize: 1
+    NumStackedVectorObservations: 1
+    m_ActionSpec:
+      m_NumContinuousActions: 0
+      BranchSizes: 01000000
+    VectorActionSize: 01000000
+    VectorActionDescriptions: []
+    VectorActionSpaceType: 0
+    hasUpgradedBrainParametersWithActionSpec: 1
+  m_Model: {fileID: 0}
+  m_InferenceDevice: 0
+  m_BehaviorType: 0
+  m_BehaviorName: DroneBehavior
+  TeamId: 0
+  m_UseChildSensors: 1
+  m_UseChildActuators: 1
+  m_ObservableAttributeHandling: 0
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

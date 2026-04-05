@@ -51,6 +51,12 @@ public class PPODroneController : Agent, IDroneController
         for (int i = 0; i < 4; i++)
             _motorOutputs[i] = 0f;
     }
+    private float NormalizeAngle(float angle)
+{
+    while (angle > 180f) angle -= 360f;
+    while (angle < -180f) angle += 360f;
+    return angle;
+}
 
     // ─────────────────────────────────────────────
     // ML-Agents Agent overrides
@@ -58,7 +64,13 @@ public class PPODroneController : Agent, IDroneController
 
     public override void OnEpisodeBegin()
     {
+            
         OnEpisodeReset();
+        // Reset drone position
+        DroneReset droneReset = GetComponent<DroneReset>();
+        if (droneReset != null)
+            droneReset.ResetDrone();
+
     }
 
     public override void CollectObservations(VectorSensor sensor)
@@ -108,22 +120,48 @@ public class PPODroneController : Agent, IDroneController
         //   -1.0 * crashPenalty              (large negative if crashed)
         // ═══════════════════════════════════════════
 
-        // Velocity tracking reward (example — tune weights as needed)
-        float velError = Vector3.Distance(_latestState.velocity, _latestState.targetVelocity);
-        float velReward = Mathf.Exp(-velError); // 1.0 when perfect, decays with error
-        AddReward(velReward * 0.1f);
+         // 1. Altitude keeping — must stay near spawn height
+    float targetAltitude = 5f;
+    float altitudeError = Mathf.Abs(_latestState.altitude - targetAltitude);
+    float altitudeReward = Mathf.Exp(-altitudeError * 1.5f);
 
-        // Stability penalty — penalize excessive angular velocity
-        float angVelMag = _latestState.angularVelocity.magnitude;
-        AddReward(-angVelMag * 0.01f);
+    // 2. Velocity tracking — must match planner target
+    float velError = Vector3.Distance(_latestState.velocity, _latestState.targetVelocity);
+    float velocityReward = Mathf.Exp(-velError);
 
-        // Crash detection — end episode if too tilted or too low
-        float tilt = Vector3.Angle(Vector3.up, _latestState.orientation * Vector3.up);
-        if (tilt > 80f || _latestState.altitude < 0.2f)
-        {
-            AddReward(-1.0f);
-            EndEpisode();
-        }
+    // 3. Stability — must stay upright
+    Vector3 euler = _latestState.eulerAngles;
+    float tilt = Mathf.Abs(NormalizeAngle(euler.x)) +
+                 Mathf.Abs(NormalizeAngle(euler.z));
+    float stabilityPenalty = -tilt / 180f * 1.0f;
+
+    // 4. Energy — discourage oscillation
+    float energyPenalty = 0f;
+    foreach (float t in _motorOutputs)
+        energyPenalty += Mathf.Abs(t);
+    energyPenalty *= -0.001f;
+
+    // 5. Survival bonus
+    float survivalBonus = 0.005f;
+
+    // 6 Vertical velocity penalty — no oscillating
+    float verticalVelPenalty = Mathf.Abs(_latestState.velocity.y) * 0.05f;
+    
+
+    // Horizontal drift penalty
+    float horizontalVel = new Vector2(_latestState.velocity.x, _latestState.velocity.z).magnitude;
+    float horizontalPenalty = -horizontalVel * 0.05f;
+    
+
+    // Combined
+    AddReward(altitudeReward * 0.5f + velocityReward * 0.5f + stabilityPenalty + energyPenalty + survivalBonus - verticalVelPenalty + horizontalPenalty);
+    // Crash detection
+    float tiltAngle = Vector3.Angle(Vector3.up, _latestState.orientation * Vector3.up);
+    if (tiltAngle > 80f || _latestState.altitude < 0.2f || _latestState.altitude > 15f)
+    {
+        AddReward(-1.0f);
+        EndEpisode();
+    }
     }
 
     public override void Heuristic(in ActionBuffers actionsOut)
