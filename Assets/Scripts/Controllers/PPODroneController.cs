@@ -106,9 +106,12 @@ public class PPODroneController : Agent, IDroneController
 
     public override void OnActionReceived(ActionBuffers actions)
     {
-        var continuous = actions.ContinuousActions;
-        for (int i = 0; i < 4; i++)
-            _motorOutputs[i] = Mathf.Clamp(continuous[i], -1f, 1f);
+       var continuous = actions.ContinuousActions;
+for (int i = 0; i < 4; i++)
+{
+    float target = Mathf.Clamp(continuous[i], -1f, 1f);
+    _motorOutputs[i] = Mathf.Lerp(_motorOutputs[i], target, 0.05f);
+}
 
         // ═══════════════════════════════════════════
         // REWARD SHAPING — Kaylie, customize this!
@@ -120,7 +123,7 @@ public class PPODroneController : Agent, IDroneController
         //   -1.0 * crashPenalty              (large negative if crashed)
         // ═══════════════════════════════════════════
 
-         // 1. Altitude keeping — must stay near spawn height
+    // 1. Altitude keeping — must stay near spawn height
     float targetAltitude = 5f;
     float altitudeError = Mathf.Abs(_latestState.altitude - targetAltitude);
     float altitudeReward = Mathf.Exp(-altitudeError * 1.5f);
