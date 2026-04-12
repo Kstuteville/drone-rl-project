@@ -98,3 +98,7 @@ InitTestScene*.unity*
 # Auto-generated scenes by play mode tests
 /[Aa]ssets/[Ii]nit[Tt]est[Ss]cene*.unity*
 venv/
+
+# ML-Agents runtime profiler output (local paths, hub tokens, noisy diffs every play/train)
+Assets/ML-Agents/Timers/*.json
+Assets/ML-Agents/Timers/*.json.meta
