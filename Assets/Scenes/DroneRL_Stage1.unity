@@ -2471,6 +2471,12 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 224135102267859126, guid: aceef1537002b5c4a8bf9f1d433d9361, type: 3}
       insertIndex: -1
       addedObject: {fileID: 847737320}
+    - targetCorrespondingSourceObject: {fileID: 224135102267859126, guid: aceef1537002b5c4a8bf9f1d433d9361, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 910001001}
+    - targetCorrespondingSourceObject: {fileID: 224135102267859126, guid: aceef1537002b5c4a8bf9f1d433d9361, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 910001002}
     - targetCorrespondingSourceObject: {fileID: 5072483314761083324, guid: aceef1537002b5c4a8bf9f1d433d9361, type: 3}
       insertIndex: -1
       addedObject: {fileID: 847737319}
@@ -2551,7 +2557,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a5c9d521e5ef4759a8246a07d52221e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  DecisionPeriod: 7
+  DecisionPeriod: 1
   TakeActionsBetweenDecisions: 1
 --- !u!114 &847737321
 MonoBehaviour:
@@ -2617,13 +2623,12 @@ MonoBehaviour:
     maxStep: 0
   hasUpgradedFromAgentParameters: 1
   MaxStep: 5000
-  altitudeWeight: 0.5
-  velocityWeight: 0.5
-  stabilityWeight: 1
-  energyWeight: 0.001
-  driftWeight: 0.1
+  altitudeWeight: 0.22
+  velocityWeight: 0.15
+  positionGuidanceWeight: 0.28
+  stabilityWeight: 0.22
+  driftWeight: 0.05
   verticalPenaltyWeight: 0.05
-  survivalBonus: 0.005
 --- !u!114 &847737325
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2637,7 +2642,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BrainParameters:
-    VectorObservationSize: 25
+    VectorObservationSize: 23
     NumStackedVectorObservations: 1
     m_ActionSpec:
       m_NumContinuousActions: 4
@@ -2646,9 +2651,9 @@ MonoBehaviour:
     VectorActionDescriptions: []
     VectorActionSpaceType: 1
     hasUpgradedBrainParametersWithActionSpec: 1
-  m_Model: {fileID: 5022602860645237092, guid: 48a9295555bb1445eb6f959afac8db44, type: 3}
+  m_Model: {fileID: 0}
   m_InferenceDevice: 0
-  m_BehaviorType: 0
+  m_BehaviorType: 1
   m_BehaviorName: DroneAgent
   TeamId: 0
   m_UseChildSensors: 1
@@ -2678,6 +2683,7 @@ MonoBehaviour:
   angularDragCoeff: 2
   motorsActive: 01010101
   targetVelocity: {x: 0, y: 0, z: 0}
+  targetTransform: {fileID: 0}
   drawMotorForces: 1
   randomizeSpawnOnEpisodeBegin: 1
   maxSpawnTilt: 1
@@ -2786,6 +2792,414 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 889675491}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &910001001
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 847737317}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d661dc131dc78499aa26ee094fdcc305, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  velocityXZ:
+    kP: 2
+    kI: 0.1
+    kD: 0.5
+  velocityY:
+    kP: 3
+    kI: 0.2
+    kD: 0.8
+  rollGains:
+    kP: 4
+    kI: 0.05
+    kD: 1.5
+  pitchGains:
+    kP: 4
+    kI: 0.05
+    kD: 1.5
+  yawGains:
+    kP: 2
+    kI: 0
+    kD: 0.5
+  maxTiltAngle: 30
+  maxYawRate: 90
+  integralClamp: 5
+--- !u!114 &910001002
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 847737317}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f2902496c0120472b90269f94a0aec7e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Record: 1
+  NumStepsToRecord: 200000
+  DemonstrationName: PIDHover
+  DemonstrationDirectory: Assets/Demonstrations
+--- !u!114 &910001003
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 985626778}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d661dc131dc78499aa26ee094fdcc305, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  velocityXZ:
+    kP: 2
+    kI: 0.1
+    kD: 0.5
+  velocityY:
+    kP: 3
+    kI: 0.2
+    kD: 0.8
+  rollGains:
+    kP: 4
+    kI: 0.05
+    kD: 1.5
+  pitchGains:
+    kP: 4
+    kI: 0.05
+    kD: 1.5
+  yawGains:
+    kP: 2
+    kI: 0
+    kD: 0.5
+  maxTiltAngle: 30
+  maxYawRate: 90
+  integralClamp: 5
+--- !u!114 &910001004
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 985626778}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f2902496c0120472b90269f94a0aec7e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Record: 1
+  NumStepsToRecord: 200000
+  DemonstrationName: PIDHover
+  DemonstrationDirectory: Assets/Demonstrations
+--- !u!114 &910001005
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1113929404}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d661dc131dc78499aa26ee094fdcc305, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  velocityXZ:
+    kP: 2
+    kI: 0.1
+    kD: 0.5
+  velocityY:
+    kP: 3
+    kI: 0.2
+    kD: 0.8
+  rollGains:
+    kP: 4
+    kI: 0.05
+    kD: 1.5
+  pitchGains:
+    kP: 4
+    kI: 0.05
+    kD: 1.5
+  yawGains:
+    kP: 2
+    kI: 0
+    kD: 0.5
+  maxTiltAngle: 30
+  maxYawRate: 90
+  integralClamp: 5
+--- !u!114 &910001006
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1113929404}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f2902496c0120472b90269f94a0aec7e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Record: 1
+  NumStepsToRecord: 200000
+  DemonstrationName: PIDHover
+  DemonstrationDirectory: Assets/Demonstrations
+--- !u!114 &910001007
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1195700736}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d661dc131dc78499aa26ee094fdcc305, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  velocityXZ:
+    kP: 2
+    kI: 0.1
+    kD: 0.5
+  velocityY:
+    kP: 3
+    kI: 0.2
+    kD: 0.8
+  rollGains:
+    kP: 4
+    kI: 0.05
+    kD: 1.5
+  pitchGains:
+    kP: 4
+    kI: 0.05
+    kD: 1.5
+  yawGains:
+    kP: 2
+    kI: 0
+    kD: 0.5
+  maxTiltAngle: 30
+  maxYawRate: 90
+  integralClamp: 5
+--- !u!114 &910001008
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1195700736}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f2902496c0120472b90269f94a0aec7e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Record: 1
+  NumStepsToRecord: 200000
+  DemonstrationName: PIDHover
+  DemonstrationDirectory: Assets/Demonstrations
+--- !u!114 &910001009
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1330179869}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d661dc131dc78499aa26ee094fdcc305, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  velocityXZ:
+    kP: 2
+    kI: 0.1
+    kD: 0.5
+  velocityY:
+    kP: 3
+    kI: 0.2
+    kD: 0.8
+  rollGains:
+    kP: 4
+    kI: 0.05
+    kD: 1.5
+  pitchGains:
+    kP: 4
+    kI: 0.05
+    kD: 1.5
+  yawGains:
+    kP: 2
+    kI: 0
+    kD: 0.5
+  maxTiltAngle: 30
+  maxYawRate: 90
+  integralClamp: 5
+--- !u!114 &910001010
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1330179869}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f2902496c0120472b90269f94a0aec7e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Record: 1
+  NumStepsToRecord: 200000
+  DemonstrationName: PIDHover
+  DemonstrationDirectory: Assets/Demonstrations
+--- !u!114 &910001011
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1359237514}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d661dc131dc78499aa26ee094fdcc305, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  velocityXZ:
+    kP: 2
+    kI: 0.1
+    kD: 0.5
+  velocityY:
+    kP: 3
+    kI: 0.2
+    kD: 0.8
+  rollGains:
+    kP: 4
+    kI: 0.05
+    kD: 1.5
+  pitchGains:
+    kP: 4
+    kI: 0.05
+    kD: 1.5
+  yawGains:
+    kP: 2
+    kI: 0
+    kD: 0.5
+  maxTiltAngle: 30
+  maxYawRate: 90
+  integralClamp: 5
+--- !u!114 &910001012
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1359237514}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f2902496c0120472b90269f94a0aec7e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Record: 1
+  NumStepsToRecord: 200000
+  DemonstrationName: PIDHover
+  DemonstrationDirectory: Assets/Demonstrations
+--- !u!114 &910001013
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1443128924}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d661dc131dc78499aa26ee094fdcc305, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  velocityXZ:
+    kP: 2
+    kI: 0.1
+    kD: 0.5
+  velocityY:
+    kP: 3
+    kI: 0.2
+    kD: 0.8
+  rollGains:
+    kP: 4
+    kI: 0.05
+    kD: 1.5
+  pitchGains:
+    kP: 4
+    kI: 0.05
+    kD: 1.5
+  yawGains:
+    kP: 2
+    kI: 0
+    kD: 0.5
+  maxTiltAngle: 30
+  maxYawRate: 90
+  integralClamp: 5
+--- !u!114 &910001014
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1443128924}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f2902496c0120472b90269f94a0aec7e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Record: 1
+  NumStepsToRecord: 200000
+  DemonstrationName: PIDHover
+  DemonstrationDirectory: Assets/Demonstrations
+--- !u!114 &910001015
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1774341660}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d661dc131dc78499aa26ee094fdcc305, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  velocityXZ:
+    kP: 2
+    kI: 0.1
+    kD: 0.5
+  velocityY:
+    kP: 3
+    kI: 0.2
+    kD: 0.8
+  rollGains:
+    kP: 4
+    kI: 0.05
+    kD: 1.5
+  pitchGains:
+    kP: 4
+    kI: 0.05
+    kD: 1.5
+  yawGains:
+    kP: 2
+    kI: 0
+    kD: 0.5
+  maxTiltAngle: 30
+  maxYawRate: 90
+  integralClamp: 5
+--- !u!114 &910001016
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1774341660}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f2902496c0120472b90269f94a0aec7e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Record: 1
+  NumStepsToRecord: 200000
+  DemonstrationName: PIDHover
+  DemonstrationDirectory: Assets/Demonstrations
 --- !u!1 &942601957
 GameObject:
   m_ObjectHideFlags: 0
@@ -2925,6 +3339,12 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 224135102267859126, guid: aceef1537002b5c4a8bf9f1d433d9361, type: 3}
       insertIndex: -1
       addedObject: {fileID: 985626781}
+    - targetCorrespondingSourceObject: {fileID: 224135102267859126, guid: aceef1537002b5c4a8bf9f1d433d9361, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 910001003}
+    - targetCorrespondingSourceObject: {fileID: 224135102267859126, guid: aceef1537002b5c4a8bf9f1d433d9361, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 910001004}
     - targetCorrespondingSourceObject: {fileID: 5072483314761083324, guid: aceef1537002b5c4a8bf9f1d433d9361, type: 3}
       insertIndex: -1
       addedObject: {fileID: 985626780}
@@ -3005,7 +3425,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a5c9d521e5ef4759a8246a07d52221e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  DecisionPeriod: 7
+  DecisionPeriod: 1
   TakeActionsBetweenDecisions: 1
 --- !u!114 &985626782
 MonoBehaviour:
@@ -3071,13 +3491,12 @@ MonoBehaviour:
     maxStep: 0
   hasUpgradedFromAgentParameters: 1
   MaxStep: 5000
-  altitudeWeight: 0.5
-  velocityWeight: 0.5
-  stabilityWeight: 1
-  energyWeight: 0.001
-  driftWeight: 0.1
+  altitudeWeight: 0.22
+  velocityWeight: 0.15
+  positionGuidanceWeight: 0.28
+  stabilityWeight: 0.22
+  driftWeight: 0.05
   verticalPenaltyWeight: 0.05
-  survivalBonus: 0.005
 --- !u!114 &985626786
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3091,7 +3510,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BrainParameters:
-    VectorObservationSize: 25
+    VectorObservationSize: 23
     NumStackedVectorObservations: 1
     m_ActionSpec:
       m_NumContinuousActions: 4
@@ -3100,9 +3519,9 @@ MonoBehaviour:
     VectorActionDescriptions: []
     VectorActionSpaceType: 1
     hasUpgradedBrainParametersWithActionSpec: 1
-  m_Model: {fileID: 5022602860645237092, guid: 48a9295555bb1445eb6f959afac8db44, type: 3}
+  m_Model: {fileID: 0}
   m_InferenceDevice: 0
-  m_BehaviorType: 0
+  m_BehaviorType: 1
   m_BehaviorName: DroneAgent
   TeamId: 0
   m_UseChildSensors: 1
@@ -3132,6 +3551,7 @@ MonoBehaviour:
   angularDragCoeff: 2
   motorsActive: 01010101
   targetVelocity: {x: 0, y: 0, z: 0}
+  targetTransform: {fileID: 0}
   drawMotorForces: 1
   randomizeSpawnOnEpisodeBegin: 1
   maxSpawnTilt: 1
@@ -3476,6 +3896,12 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 224135102267859126, guid: aceef1537002b5c4a8bf9f1d433d9361, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1113929407}
+    - targetCorrespondingSourceObject: {fileID: 224135102267859126, guid: aceef1537002b5c4a8bf9f1d433d9361, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 910001005}
+    - targetCorrespondingSourceObject: {fileID: 224135102267859126, guid: aceef1537002b5c4a8bf9f1d433d9361, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 910001006}
     - targetCorrespondingSourceObject: {fileID: 5072483314761083324, guid: aceef1537002b5c4a8bf9f1d433d9361, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1113929406}
@@ -3556,7 +3982,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a5c9d521e5ef4759a8246a07d52221e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  DecisionPeriod: 7
+  DecisionPeriod: 1
   TakeActionsBetweenDecisions: 1
 --- !u!114 &1113929408
 MonoBehaviour:
@@ -3622,13 +4048,12 @@ MonoBehaviour:
     maxStep: 0
   hasUpgradedFromAgentParameters: 1
   MaxStep: 5000
-  altitudeWeight: 0.5
-  velocityWeight: 0.5
-  stabilityWeight: 1
-  energyWeight: 0.001
-  driftWeight: 0.1
+  altitudeWeight: 0.22
+  velocityWeight: 0.15
+  positionGuidanceWeight: 0.28
+  stabilityWeight: 0.22
+  driftWeight: 0.05
   verticalPenaltyWeight: 0.05
-  survivalBonus: 0.005
 --- !u!114 &1113929412
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3642,7 +4067,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BrainParameters:
-    VectorObservationSize: 25
+    VectorObservationSize: 23
     NumStackedVectorObservations: 1
     m_ActionSpec:
       m_NumContinuousActions: 4
@@ -3651,9 +4076,9 @@ MonoBehaviour:
     VectorActionDescriptions: []
     VectorActionSpaceType: 1
     hasUpgradedBrainParametersWithActionSpec: 1
-  m_Model: {fileID: 5022602860645237092, guid: 48a9295555bb1445eb6f959afac8db44, type: 3}
+  m_Model: {fileID: 0}
   m_InferenceDevice: 0
-  m_BehaviorType: 0
+  m_BehaviorType: 1
   m_BehaviorName: DroneAgent
   TeamId: 0
   m_UseChildSensors: 1
@@ -3683,6 +4108,7 @@ MonoBehaviour:
   angularDragCoeff: 2
   motorsActive: 01010101
   targetVelocity: {x: 0, y: 0, z: 0}
+  targetTransform: {fileID: 0}
   drawMotorForces: 1
   randomizeSpawnOnEpisodeBegin: 1
   maxSpawnTilt: 1
@@ -4024,6 +4450,12 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 224135102267859126, guid: aceef1537002b5c4a8bf9f1d433d9361, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1195700739}
+    - targetCorrespondingSourceObject: {fileID: 224135102267859126, guid: aceef1537002b5c4a8bf9f1d433d9361, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 910001007}
+    - targetCorrespondingSourceObject: {fileID: 224135102267859126, guid: aceef1537002b5c4a8bf9f1d433d9361, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 910001008}
     - targetCorrespondingSourceObject: {fileID: 5072483314761083324, guid: aceef1537002b5c4a8bf9f1d433d9361, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1195700738}
@@ -4104,7 +4536,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a5c9d521e5ef4759a8246a07d52221e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  DecisionPeriod: 7
+  DecisionPeriod: 1
   TakeActionsBetweenDecisions: 1
 --- !u!114 &1195700740
 MonoBehaviour:
@@ -4170,13 +4602,12 @@ MonoBehaviour:
     maxStep: 0
   hasUpgradedFromAgentParameters: 1
   MaxStep: 5000
-  altitudeWeight: 0.5
-  velocityWeight: 0.5
-  stabilityWeight: 1
-  energyWeight: 0.001
-  driftWeight: 0.1
+  altitudeWeight: 0.22
+  velocityWeight: 0.15
+  positionGuidanceWeight: 0.28
+  stabilityWeight: 0.22
+  driftWeight: 0.05
   verticalPenaltyWeight: 0.05
-  survivalBonus: 0.005
 --- !u!114 &1195700744
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4190,7 +4621,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BrainParameters:
-    VectorObservationSize: 25
+    VectorObservationSize: 23
     NumStackedVectorObservations: 1
     m_ActionSpec:
       m_NumContinuousActions: 4
@@ -4199,9 +4630,9 @@ MonoBehaviour:
     VectorActionDescriptions: []
     VectorActionSpaceType: 1
     hasUpgradedBrainParametersWithActionSpec: 1
-  m_Model: {fileID: 5022602860645237092, guid: 48a9295555bb1445eb6f959afac8db44, type: 3}
+  m_Model: {fileID: 0}
   m_InferenceDevice: 0
-  m_BehaviorType: 0
+  m_BehaviorType: 1
   m_BehaviorName: DroneAgent
   TeamId: 0
   m_UseChildSensors: 1
@@ -4231,6 +4662,7 @@ MonoBehaviour:
   angularDragCoeff: 2
   motorsActive: 01010101
   targetVelocity: {x: 0, y: 0, z: 0}
+  targetTransform: {fileID: 0}
   drawMotorForces: 1
   randomizeSpawnOnEpisodeBegin: 1
   maxSpawnTilt: 1
@@ -4680,6 +5112,12 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 224135102267859126, guid: aceef1537002b5c4a8bf9f1d433d9361, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1330179872}
+    - targetCorrespondingSourceObject: {fileID: 224135102267859126, guid: aceef1537002b5c4a8bf9f1d433d9361, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 910001009}
+    - targetCorrespondingSourceObject: {fileID: 224135102267859126, guid: aceef1537002b5c4a8bf9f1d433d9361, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 910001010}
     - targetCorrespondingSourceObject: {fileID: 5072483314761083324, guid: aceef1537002b5c4a8bf9f1d433d9361, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1330179871}
@@ -4760,7 +5198,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a5c9d521e5ef4759a8246a07d52221e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  DecisionPeriod: 7
+  DecisionPeriod: 1
   TakeActionsBetweenDecisions: 1
 --- !u!114 &1330179873
 MonoBehaviour:
@@ -4826,13 +5264,12 @@ MonoBehaviour:
     maxStep: 0
   hasUpgradedFromAgentParameters: 1
   MaxStep: 5000
-  altitudeWeight: 0.5
-  velocityWeight: 0.5
-  stabilityWeight: 1
-  energyWeight: 0.001
-  driftWeight: 0.1
+  altitudeWeight: 0.22
+  velocityWeight: 0.15
+  positionGuidanceWeight: 0.28
+  stabilityWeight: 0.22
+  driftWeight: 0.05
   verticalPenaltyWeight: 0.05
-  survivalBonus: 0.005
 --- !u!114 &1330179877
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4846,7 +5283,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BrainParameters:
-    VectorObservationSize: 25
+    VectorObservationSize: 23
     NumStackedVectorObservations: 1
     m_ActionSpec:
       m_NumContinuousActions: 4
@@ -4855,9 +5292,9 @@ MonoBehaviour:
     VectorActionDescriptions: []
     VectorActionSpaceType: 1
     hasUpgradedBrainParametersWithActionSpec: 1
-  m_Model: {fileID: 5022602860645237092, guid: 48a9295555bb1445eb6f959afac8db44, type: 3}
+  m_Model: {fileID: 0}
   m_InferenceDevice: 0
-  m_BehaviorType: 0
+  m_BehaviorType: 1
   m_BehaviorName: DroneAgent
   TeamId: 0
   m_UseChildSensors: 1
@@ -4887,6 +5324,7 @@ MonoBehaviour:
   angularDragCoeff: 2
   motorsActive: 01010101
   targetVelocity: {x: 0, y: 0, z: 0}
+  targetTransform: {fileID: 0}
   drawMotorForces: 1
   randomizeSpawnOnEpisodeBegin: 1
   maxSpawnTilt: 1
@@ -4983,6 +5421,12 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 224135102267859126, guid: aceef1537002b5c4a8bf9f1d433d9361, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1359237517}
+    - targetCorrespondingSourceObject: {fileID: 224135102267859126, guid: aceef1537002b5c4a8bf9f1d433d9361, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 910001011}
+    - targetCorrespondingSourceObject: {fileID: 224135102267859126, guid: aceef1537002b5c4a8bf9f1d433d9361, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 910001012}
     - targetCorrespondingSourceObject: {fileID: 5072483314761083324, guid: aceef1537002b5c4a8bf9f1d433d9361, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1359237516}
@@ -5063,7 +5507,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a5c9d521e5ef4759a8246a07d52221e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  DecisionPeriod: 7
+  DecisionPeriod: 1
   TakeActionsBetweenDecisions: 1
 --- !u!114 &1359237518
 MonoBehaviour:
@@ -5129,13 +5573,12 @@ MonoBehaviour:
     maxStep: 0
   hasUpgradedFromAgentParameters: 1
   MaxStep: 5000
-  altitudeWeight: 0.5
-  velocityWeight: 0.5
-  stabilityWeight: 1
-  energyWeight: 0.001
-  driftWeight: 0.1
+  altitudeWeight: 0.22
+  velocityWeight: 0.15
+  positionGuidanceWeight: 0.28
+  stabilityWeight: 0.22
+  driftWeight: 0.05
   verticalPenaltyWeight: 0.05
-  survivalBonus: 0.005
 --- !u!114 &1359237522
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5149,7 +5592,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BrainParameters:
-    VectorObservationSize: 25
+    VectorObservationSize: 23
     NumStackedVectorObservations: 1
     m_ActionSpec:
       m_NumContinuousActions: 4
@@ -5158,9 +5601,9 @@ MonoBehaviour:
     VectorActionDescriptions: []
     VectorActionSpaceType: 1
     hasUpgradedBrainParametersWithActionSpec: 1
-  m_Model: {fileID: 5022602860645237092, guid: 48a9295555bb1445eb6f959afac8db44, type: 3}
+  m_Model: {fileID: 0}
   m_InferenceDevice: 0
-  m_BehaviorType: 0
+  m_BehaviorType: 1
   m_BehaviorName: DroneAgent
   TeamId: 0
   m_UseChildSensors: 1
@@ -5190,6 +5633,7 @@ MonoBehaviour:
   angularDragCoeff: 2
   motorsActive: 01010101
   targetVelocity: {x: 0, y: 0, z: 0}
+  targetTransform: {fileID: 0}
   drawMotorForces: 1
   randomizeSpawnOnEpisodeBegin: 1
   maxSpawnTilt: 1
@@ -5497,6 +5941,12 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 224135102267859126, guid: aceef1537002b5c4a8bf9f1d433d9361, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1443128927}
+    - targetCorrespondingSourceObject: {fileID: 224135102267859126, guid: aceef1537002b5c4a8bf9f1d433d9361, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 910001013}
+    - targetCorrespondingSourceObject: {fileID: 224135102267859126, guid: aceef1537002b5c4a8bf9f1d433d9361, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 910001014}
     - targetCorrespondingSourceObject: {fileID: 5072483314761083324, guid: aceef1537002b5c4a8bf9f1d433d9361, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1443128926}
@@ -5577,7 +6027,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a5c9d521e5ef4759a8246a07d52221e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  DecisionPeriod: 7
+  DecisionPeriod: 1
   TakeActionsBetweenDecisions: 1
 --- !u!114 &1443128928
 MonoBehaviour:
@@ -5643,13 +6093,12 @@ MonoBehaviour:
     maxStep: 0
   hasUpgradedFromAgentParameters: 1
   MaxStep: 5000
-  altitudeWeight: 0.5
-  velocityWeight: 0.5
-  stabilityWeight: 1
-  energyWeight: 0.001
-  driftWeight: 0.1
+  altitudeWeight: 0.22
+  velocityWeight: 0.15
+  positionGuidanceWeight: 0.28
+  stabilityWeight: 0.22
+  driftWeight: 0.05
   verticalPenaltyWeight: 0.05
-  survivalBonus: 0.005
 --- !u!114 &1443128932
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5663,7 +6112,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BrainParameters:
-    VectorObservationSize: 25
+    VectorObservationSize: 23
     NumStackedVectorObservations: 1
     m_ActionSpec:
       m_NumContinuousActions: 4
@@ -5672,9 +6121,9 @@ MonoBehaviour:
     VectorActionDescriptions: []
     VectorActionSpaceType: 1
     hasUpgradedBrainParametersWithActionSpec: 1
-  m_Model: {fileID: 5022602860645237092, guid: 48a9295555bb1445eb6f959afac8db44, type: 3}
+  m_Model: {fileID: 0}
   m_InferenceDevice: 0
-  m_BehaviorType: 0
+  m_BehaviorType: 1
   m_BehaviorName: DroneAgent
   TeamId: 0
   m_UseChildSensors: 1
@@ -5704,6 +6153,7 @@ MonoBehaviour:
   angularDragCoeff: 2
   motorsActive: 01010101
   targetVelocity: {x: 0, y: 0, z: 0}
+  targetTransform: {fileID: 0}
   drawMotorForces: 1
   randomizeSpawnOnEpisodeBegin: 1
   maxSpawnTilt: 1
@@ -6245,6 +6695,12 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 224135102267859126, guid: aceef1537002b5c4a8bf9f1d433d9361, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1774341672}
+    - targetCorrespondingSourceObject: {fileID: 224135102267859126, guid: aceef1537002b5c4a8bf9f1d433d9361, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 910001015}
+    - targetCorrespondingSourceObject: {fileID: 224135102267859126, guid: aceef1537002b5c4a8bf9f1d433d9361, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 910001016}
     - targetCorrespondingSourceObject: {fileID: 5072483314761083324, guid: aceef1537002b5c4a8bf9f1d433d9361, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1973186062}
@@ -6323,13 +6779,12 @@ MonoBehaviour:
     maxStep: 0
   hasUpgradedFromAgentParameters: 1
   MaxStep: 5000
-  altitudeWeight: 0.5
-  velocityWeight: 0.5
-  stabilityWeight: 1
-  energyWeight: 0.001
-  driftWeight: 0.1
+  altitudeWeight: 0.22
+  velocityWeight: 0.15
+  positionGuidanceWeight: 0.28
+  stabilityWeight: 0.22
+  driftWeight: 0.05
   verticalPenaltyWeight: 0.05
-  survivalBonus: 0.005
 --- !u!114 &1774341666
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6343,7 +6798,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BrainParameters:
-    VectorObservationSize: 25
+    VectorObservationSize: 23
     NumStackedVectorObservations: 1
     m_ActionSpec:
       m_NumContinuousActions: 4
@@ -6352,9 +6807,9 @@ MonoBehaviour:
     VectorActionDescriptions: []
     VectorActionSpaceType: 1
     hasUpgradedBrainParametersWithActionSpec: 1
-  m_Model: {fileID: 5022602860645237092, guid: 48a9295555bb1445eb6f959afac8db44, type: 3}
+  m_Model: {fileID: 0}
   m_InferenceDevice: 0
-  m_BehaviorType: 0
+  m_BehaviorType: 1
   m_BehaviorName: DroneAgent
   TeamId: 0
   m_UseChildSensors: 1
@@ -6384,6 +6839,7 @@ MonoBehaviour:
   angularDragCoeff: 2
   motorsActive: 01010101
   targetVelocity: {x: 0, y: 0, z: 0}
+  targetTransform: {fileID: 0}
   drawMotorForces: 1
   randomizeSpawnOnEpisodeBegin: 1
   maxSpawnTilt: 1
@@ -6404,7 +6860,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a5c9d521e5ef4759a8246a07d52221e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  DecisionPeriod: 7
+  DecisionPeriod: 1
   TakeActionsBetweenDecisions: 1
 --- !u!1 &1786380543
 GameObject:

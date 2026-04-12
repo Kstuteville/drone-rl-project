@@ -16,9 +16,9 @@ public class RotorSpin : MonoBehaviour
 
     void Awake()
     {
-        droneBody = transform.root.GetComponent<DroneBody>();
+        droneBody = GetComponentInParent<DroneBody>();
         if (droneBody == null)
-            Debug.LogError($"[RotorSpin] No DroneBody found on root of {transform.root.name}");
+            Debug.LogError($"[RotorSpin] No DroneBody found in parents of {name} (root={transform.root.name})");
     }
 
     void Update()

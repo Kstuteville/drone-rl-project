@@ -4632,7 +4632,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6223905125645859502}
   serializedVersion: 4
-  m_Mass: 1.5
+  m_Mass: 1
   m_Drag: 0
   m_AngularDrag: 0
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -5332,7 +5332,10 @@ MonoBehaviour:
   angularDragCoeff: 2
   motorsActive: 01010101
   targetVelocity: {x: 0, y: 0, z: 0}
+  targetTransform: {fileID: 0}
   drawMotorForces: 1
+  randomizeSpawnOnEpisodeBegin: 0
+  maxSpawnTilt: 0
 --- !u!1 &8265970856847179839
 GameObject:
   m_ObjectHideFlags: 0

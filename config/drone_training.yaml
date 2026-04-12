@@ -1,8 +1,40 @@
-# ML-Agents training configuration for PPODroneController
+# ML-Agents training configuration for PPODroneController (DroneAgent behavior name)
 # Run with: mlagents-learn config/drone_training.yaml --run-id=drone_ppo_v1
 #
-# Kaylie: Tune these hyperparameters based on training results.
-# Monitor with: tensorboard --logdir results
+# Curriculum: environment_parameters.drone_curriculum_stage (read in Unity via DroneBody.ReadCurriculumStage).
+# Thresholds are mean episode reward (measure: reward) — CALIBRATE after reward scale change (-100 terminal, etc.).
+# ML-Agents 0.27 PPO: beta is fixed (no beta_schedule in YAML); tune beta if entropy collapses.
+
+environment_parameters:
+  drone_curriculum_stage:
+    curriculum:
+      - name: Stage1_Baseline
+        completion_criteria:
+          measure: reward
+          behavior: DroneAgent
+          signal_smoothing: true
+          min_lesson_length: 800
+          threshold: 0.9
+        value: 1.0
+      - name: Stage2_DomainRand
+        completion_criteria:
+          measure: reward
+          behavior: DroneAgent
+          signal_smoothing: true
+          min_lesson_length: 200
+          threshold: 0.9
+        value: 2.0
+      - name: Stage3_WindLagNoise
+        completion_criteria:
+          measure: reward
+          behavior: DroneAgent
+          signal_smoothing: true
+          min_lesson_length: 300
+          threshold: 1.0
+        value: 3.0
+      - name: Stage4_MotorFailure
+        value: 4.0
+
 behaviors:
   DroneAgent:
     trainer_type: ppo
@@ -11,14 +43,14 @@ behaviors:
       batch_size: 2048
       buffer_size: 40960
       learning_rate: 3.0e-4
-      beta: 5.0e-3          # Entropy regularization
-      epsilon: 0.2           # PPO clip parameter
-      lambd: 0.95            # GAE lambda
+      beta: 1.0e-4
+      epsilon: 0.2
+      lambd: 0.95
       num_epoch: 3
-      learning_rate_schedule: linear
+      learning_rate_schedule: constant
 
     network_settings:
-      normalize: true        # Normalize observations
+      normalize: true
       hidden_units: 256
       num_layers: 2
       vis_encode_type: simple
@@ -28,10 +60,14 @@ behaviors:
         gamma: 0.99
         strength: 1.0
 
-    max_steps: 5000000
+    # Uncomment after re-recording Assets/Demonstrations/PIDHover.demo (BC errors if file missing).
+    behavioral_cloning:
+      demo_path: Assets/Demonstrations/PIDHover.demo
+      steps: 200000
+      strength: 0.75
+      batch_size: 512
+
+    max_steps: 10000000
     time_horizon: 512
     summary_freq: 10000
     keep_checkpoints: 5
-
-
-    

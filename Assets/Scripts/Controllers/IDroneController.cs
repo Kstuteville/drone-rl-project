@@ -18,8 +18,11 @@ public struct DroneState
     /// World-space linear velocity (m/s)
     public Vector3 velocity;
 
-    /// World-space angular velocity (rad/s)
+    /// Body-frame angular velocity (rad/s) — transform.InverseTransformDirection(rb.angularVelocity)
     public Vector3 angularVelocity;
+
+    /// World-space angular velocity (rad/s) — for PID yaw damping and any world-frame control
+    public Vector3 angularVelocityWorld;
 
     /// Current orientation quaternion
     public Quaternion orientation;
@@ -29,6 +32,12 @@ public struct DroneState
 
     /// World-space position
     public Vector3 position;
+
+    /// World-space hover / goal position (from target transform or default)
+    public Vector3 targetPosition;
+
+    /// position - targetPosition (world m)
+    public Vector3 relativePositionToTarget;
 
     /// Which motors are currently functional (true = alive)
     /// Index: 0=FrontLeft, 1=FrontRight, 2=RearLeft, 3=RearRight

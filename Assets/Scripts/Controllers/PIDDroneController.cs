@@ -163,7 +163,7 @@ public class PIDDroneController : MonoBehaviour, IDroneController
         // Current euler angles
         float currentRoll  = NormalizeAngle(state.eulerAngles.z);
         float currentPitch = NormalizeAngle(state.eulerAngles.x);
-        float currentYaw   = state.angularVelocity.y * Mathf.Rad2Deg;
+        float currentYaw   = state.angularVelocityWorld.y * Mathf.Rad2Deg;
 
         // Roll error: desired vs actual
         float rollError = rollCmd - currentRoll;

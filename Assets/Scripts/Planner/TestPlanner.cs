@@ -52,12 +52,24 @@ public class TestPlanner : MonoBehaviour
             drone = GetComponent<DroneBody>();
     }
 
+    /// <summary>Called from PPODroneController each ML-Agents episode so motor-failure can re-trigger.</summary>
+    public void EpisodeReset()
+    {
+        _timer = 0f;
+        _motorKilled = false;
+        motorToKill = Random.Range(0, 4);
+    }
+
     void Update()
     {
         if (drone == null) return;
         _timer += Time.deltaTime;
 
-        switch (mode)
+        TestMode effective = mode;
+        if (DroneBody.ReadCurriculumStage() >= 4)
+            effective = TestMode.MotorFailure;
+
+        switch (effective)
         {
             case TestMode.Hover:
                 _currentTarget = Vector3.zero;
