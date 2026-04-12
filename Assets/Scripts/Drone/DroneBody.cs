@@ -22,6 +22,7 @@ public class DroneBody : MonoBehaviour
 
     [Header("Aerodynamics")]
     public float linearDragCoeff = 0.5f;
+    private Vector3 _homePosition;
     public float angularDragCoeff = 2.0f;
 
     [Header("Motor Health")]
@@ -37,7 +38,7 @@ public class DroneBody : MonoBehaviour
     public bool randomizeSpawnOnEpisodeBegin = false;
 
     [Header("Spawn Randomization")]
-    public float maxSpawnTilt = 1f;
+    
 
     private Rigidbody _rb;
     private IDroneController _controller;
@@ -66,10 +67,16 @@ public class DroneBody : MonoBehaviour
 
         _controller?.Initialize(BuildConfig());
     }
+    [Header("Spawn Randomization")]
+    public float maxSpawnTilt = 30f;
+    public float maxSpawnVelocityXZ = 1f;
+    public float maxSpawnVelocityY = 0.5f;
 
     void Start()
     {
         Debug.Log($"Starting velocity: {_rb.velocity}");
+        Debug.Log($"Starting position: {transform.position}");
+        _homePosition = transform.position;
         Debug.Log($"Starting position: {transform.position}");
     }
 
@@ -113,22 +120,33 @@ public class DroneBody : MonoBehaviour
     // ─────────────────────────────────────────────
     // Spawn — tilt only, everything else fixed
     // ─────────────────────────────────────────────
+public void RandomizeSpawn()
+{
+    // Random velocity — simulates bullet impact
+    _rb.velocity = new Vector3(
+        Random.Range(-maxSpawnVelocityXZ, maxSpawnVelocityXZ),
+        Random.Range(-maxSpawnVelocityY, maxSpawnVelocityY),
+        Random.Range(-maxSpawnVelocityXZ, maxSpawnVelocityXZ)
+    );
+    _rb.angularVelocity = Vector3.zero;
 
-    public void RandomizeSpawn()
-    {
-        // Fixed position at exact target altitude, center of arena
-        _rb.velocity = Vector3.zero;
-        _rb.angularVelocity = Vector3.zero;
+    // Always return to home position at Y=5
+    transform.position = new Vector3(
+        _homePosition.x,
+        5f,
+        _homePosition.z
+    );
 
-        transform.position = new Vector3(0f, 5f, 0f);
+    // Bidirectional tilt — 0 to 30 degrees in any direction
+    float tiltX = Random.Range(0f, maxSpawnTilt) * (Random.value > 0.5f ? 1f : -1f);
+    float tiltZ = Random.Range(0f, maxSpawnTilt) * (Random.value > 0.5f ? 1f : -1f);
 
-        // Only tilt is random
-        transform.rotation = Quaternion.Euler(
-            Random.Range(-maxSpawnTilt, maxSpawnTilt),
-            Random.Range(0f, 360f),
-            Random.Range(-maxSpawnTilt, maxSpawnTilt)
-        );
-    }
+    transform.rotation = Quaternion.Euler(
+        tiltX,
+        Random.Range(0f, 360f),
+        tiltZ
+    );
+}
 
     private DroneState BuildState()
     {

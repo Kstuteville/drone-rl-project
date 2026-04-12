@@ -125,7 +125,7 @@ public class PPODroneController : Agent, IDroneController
 
         // Crash detection
         float tiltAngle = Vector3.Angle(Vector3.up, _latestState.orientation * Vector3.up);
-        if (tiltAngle > 80f || _latestState.altitude < 0.2f || _latestState.altitude > 15f)
+        if (tiltAngle > 120f || _latestState.altitude < 0.2f || _latestState.altitude > 25f)
         {
             AddReward(-1.0f);
             EndEpisode();
