@@ -1,0 +1,41 @@
+{
+    "drone_curriculum_stage": {
+        "lesson_num": 0
+    },
+    "DroneAgent": {
+        "checkpoints": [
+            {
+                "steps": 499999,
+                "file_path": "results/reward_cal7/DroneAgent/DroneAgent-499999.onnx",
+                "reward": -4.661670266573842,
+                "creation_time": 1775969912.003114,
+                "auxillary_file_paths": [
+                    "results/reward_cal7/DroneAgent/DroneAgent-499999.pt"
+                ]
+            },
+            {
+                "steps": 632400,
+                "file_path": "results/reward_cal7/DroneAgent/DroneAgent-632400.onnx",
+                "reward": -4.661661153403107,
+                "creation_time": 1775970070.907007,
+                "auxillary_file_paths": [
+                    "results/reward_cal7/DroneAgent/DroneAgent-632400.pt"
+                ]
+            }
+        ],
+        "final_checkpoint": {
+            "steps": 632400,
+            "file_path": "results/reward_cal7/DroneAgent.onnx",
+            "reward": -4.661661153403107,
+            "creation_time": 1775970070.907007,
+            "auxillary_file_paths": [
+                "results/reward_cal7/DroneAgent/DroneAgent-632400.pt"
+            ]
+        }
+    },
+    "metadata": {
+        "stats_format_version": "0.3.0",
+        "mlagents_version": "0.27.0",
+        "torch_version": "2.4.1"
+    }
+}

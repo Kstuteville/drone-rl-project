@@ -1,0 +1,42 @@
+{
+    "name": "root",
+    "metadata": {
+        "timer_format_version": "0.1.0",
+        "start_time_seconds": "1775963579",
+        "python_version": "3.8.18 (default, Sep 11 2023, 08:17:16) \n[Clang 14.0.6 ]",
+        "command_line_arguments": "/opt/homebrew/Caskroom/miniconda/base/envs/ml-drone38/bin/mlagents-learn config/drone_training.yaml --run-id=reward_calibration --force",
+        "mlagents_version": "0.27.0",
+        "mlagents_envs_version": "0.27.0",
+        "communication_protocol_version": "1.5.0",
+        "pytorch_version": "2.4.1",
+        "numpy_version": "1.23.5",
+        "end_time_seconds": "1775963639"
+    },
+    "total": 60.679650792000004,
+    "count": 1,
+    "self": 0.008950165999998205,
+    "children": {
+        "run_training.setup": {
+            "total": 0.014678083999999925,
+            "count": 1,
+            "self": 0.014678083999999925
+        },
+        "TrainerController.start_learning": {
+            "total": 60.656022542,
+            "count": 1,
+            "self": 0.000351125000001673,
+            "children": {
+                "TrainerController._reset_env": {
+                    "total": 60.65549575,
+                    "count": 1,
+                    "self": 60.65549575
+                },
+                "TrainerController._save_models": {
+                    "total": 0.0001756670000006011,
+                    "count": 1,
+                    "self": 0.0001756670000006011
+                }
+            }
+        }
+    }
+}

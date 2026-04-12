@@ -1,0 +1,59 @@
+{
+    "drone_curriculum_stage": {
+        "lesson_num": 0
+    },
+    "DroneAgent": {
+        "checkpoints": [
+            {
+                "steps": 499999,
+                "file_path": "results/reward_cal3/DroneAgent/DroneAgent-499999.onnx",
+                "reward": -4.601622134366027,
+                "creation_time": 1775965056.944015,
+                "auxillary_file_paths": [
+                    "results/reward_cal3/DroneAgent/DroneAgent-499999.pt"
+                ]
+            },
+            {
+                "steps": 999999,
+                "file_path": "results/reward_cal3/DroneAgent/DroneAgent-999999.onnx",
+                "reward": -4.592143101861663,
+                "creation_time": 1775965456.645131,
+                "auxillary_file_paths": [
+                    "results/reward_cal3/DroneAgent/DroneAgent-999999.pt"
+                ]
+            },
+            {
+                "steps": 1499999,
+                "file_path": "results/reward_cal3/DroneAgent/DroneAgent-1499999.onnx",
+                "reward": -4.586595533868505,
+                "creation_time": 1775965859.936053,
+                "auxillary_file_paths": [
+                    "results/reward_cal3/DroneAgent/DroneAgent-1499999.pt"
+                ]
+            },
+            {
+                "steps": 1786144,
+                "file_path": "results/reward_cal3/DroneAgent/DroneAgent-1786144.onnx",
+                "reward": -4.585173986274949,
+                "creation_time": 1775966087.104718,
+                "auxillary_file_paths": [
+                    "results/reward_cal3/DroneAgent/DroneAgent-1786144.pt"
+                ]
+            }
+        ],
+        "final_checkpoint": {
+            "steps": 1786144,
+            "file_path": "results/reward_cal3/DroneAgent.onnx",
+            "reward": -4.585173986274949,
+            "creation_time": 1775966087.104718,
+            "auxillary_file_paths": [
+                "results/reward_cal3/DroneAgent/DroneAgent-1786144.pt"
+            ]
+        }
+    },
+    "metadata": {
+        "stats_format_version": "0.3.0",
+        "mlagents_version": "0.27.0",
+        "torch_version": "2.4.1"
+    }
+}

@@ -1,0 +1,121 @@
+default_settings: null
+behaviors:
+  DroneAgent:
+    trainer_type: ppo
+    hyperparameters:
+      batch_size: 2048
+      buffer_size: 40960
+      learning_rate: 0.0003
+      beta: 0.0001
+      epsilon: 0.2
+      lambd: 0.95
+      num_epoch: 3
+      learning_rate_schedule: constant
+    network_settings:
+      normalize: true
+      hidden_units: 256
+      num_layers: 2
+      vis_encode_type: simple
+      memory: null
+      goal_conditioning_type: hyper
+    reward_signals:
+      extrinsic:
+        gamma: 0.99
+        strength: 1.0
+        network_settings:
+          normalize: false
+          hidden_units: 128
+          num_layers: 2
+          vis_encode_type: simple
+          memory: null
+          goal_conditioning_type: hyper
+    init_path: null
+    keep_checkpoints: 5
+    checkpoint_interval: 500000
+    max_steps: 10000000
+    time_horizon: 512
+    summary_freq: 10000
+    threaded: false
+    self_play: null
+    behavioral_cloning:
+      demo_path: Assets/Demonstrations/PIDHover.demo
+      steps: 200000
+      strength: 0.75
+      samples_per_update: 0
+      num_epoch: null
+      batch_size: 512
+env_settings:
+  env_path: null
+  env_args: null
+  base_port: 5005
+  num_envs: 1
+  seed: -1
+engine_settings:
+  width: 84
+  height: 84
+  quality_level: 5
+  time_scale: 20
+  target_frame_rate: -1
+  capture_frame_rate: 60
+  no_graphics: false
+environment_parameters:
+  drone_curriculum_stage:
+    curriculum:
+    - value:
+        sampler_type: constant
+        sampler_parameters:
+          seed: 3831
+          value: 1.0
+      name: Stage1_Baseline
+      completion_criteria:
+        behavior: DroneAgent
+        measure: reward
+        min_lesson_length: 800
+        signal_smoothing: true
+        threshold: 0.9
+        require_reset: false
+    - value:
+        sampler_type: constant
+        sampler_parameters:
+          seed: 3832
+          value: 2.0
+      name: Stage2_DomainRand
+      completion_criteria:
+        behavior: DroneAgent
+        measure: reward
+        min_lesson_length: 1000
+        signal_smoothing: true
+        threshold: 0.9
+        require_reset: false
+    - value:
+        sampler_type: constant
+        sampler_parameters:
+          seed: 3833
+          value: 3.0
+      name: Stage3_WindLagNoise
+      completion_criteria:
+        behavior: DroneAgent
+        measure: reward
+        min_lesson_length: 1200
+        signal_smoothing: true
+        threshold: 1.0
+        require_reset: false
+    - value:
+        sampler_type: constant
+        sampler_parameters:
+          seed: 3834
+          value: 4.0
+      name: Stage4_MotorFailure
+      completion_criteria: null
+checkpoint_settings:
+  run_id: reward_optimal2
+  initialize_from: null
+  load_model: false
+  resume: false
+  force: false
+  train_model: false
+  inference: false
+  results_dir: results
+torch_settings:
+  device: null
+debug: false
