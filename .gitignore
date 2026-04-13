@@ -41,6 +41,9 @@ sysinfo.txt
 # Crashlytics generated file
 crashlytics-build.properties
 
+ProjectSettings/Packages/
+.claude/
+
 # Packed Addressables
 /[Aa]ssets/[Aa]ddressable[Aa]ssets[Dd]ata/**/[Cc]atalog*.json
 /[Aa]ssets/[Aa]ddressable[Aa]ssets[Dd]ata/**/[Cc]atalog*.hash
