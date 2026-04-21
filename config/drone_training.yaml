@@ -21,7 +21,7 @@ environment_parameters:
           measure: reward
           behavior: DroneAgent
           signal_smoothing: true
-          min_lesson_length: 200
+          min_lesson_length: 500
           threshold: 0.9
         value: 2.0
       - name: Stage3_WindLagNoise
@@ -29,7 +29,7 @@ environment_parameters:
           measure: reward
           behavior: DroneAgent
           signal_smoothing: true
-          min_lesson_length: 300
+          min_lesson_length: 500
           threshold: 1.0
         value: 3.0
       - name: Stage4_MotorFailure
