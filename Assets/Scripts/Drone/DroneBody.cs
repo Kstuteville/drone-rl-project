@@ -44,9 +44,15 @@ public class DroneBody : MonoBehaviour
     public bool randomizeSpawnOnEpisodeBegin = false;
 
     [Header("Spawn Randomization")]
+    [Tooltip("Legacy fallback used only if spawnConfig is null. New work should configure spawnConfig instead.")]
     public float maxSpawnTilt = 10f;
 
+    [Tooltip("Preset-driven spawn variation. If null at Awake, defaults to SpawnVariationConfig.Easy() (matches pre-refactor behavior).")]
+    public SpawnVariationConfig spawnConfig;
+
     private Rigidbody _rb;
+    private System.Random _spawnRng;
+    private int _episodeIndex;
     private IDroneController _controller;
     private float[] _lastMotorOutputs = new float[4];
     private float[] _currentThrusts = new float[4];
@@ -80,6 +86,9 @@ public class DroneBody : MonoBehaviour
     {
         _rb = GetComponent<Rigidbody>();
         _rb.useGravity = true;
+
+        if (spawnConfig == null)
+            spawnConfig = SpawnVariationConfig.Easy();
 
         _baseMotorLocal = new Vector3[motorPositions.Length];
         for (int i = 0; i < motorPositions.Length; i++)
@@ -160,6 +169,14 @@ public class DroneBody : MonoBehaviour
             _rb.AddForce(_windForceWorld, ForceMode.Force);
     }
 
+    /// <summary>Replace spawnConfig at runtime (used by ControllerEvaluator). Optionally resets episode index so seeded sequences restart.</summary>
+    public void SetSpawnConfig(SpawnVariationConfig cfg, bool resetEpisodeIndex = true)
+    {
+        spawnConfig = cfg != null ? cfg : SpawnVariationConfig.Easy();
+        if (resetEpisodeIndex) _episodeIndex = 0;
+        _spawnRng = null;
+    }
+
     public Vector3 GetTargetPosition()
     {
         if (targetTransform != null)
@@ -175,21 +192,39 @@ public class DroneBody : MonoBehaviour
 
     public void RandomizeSpawn()
     {
+        if (spawnConfig == null)
+            spawnConfig = SpawnVariationConfig.Easy();
+
         _rb.angularVelocity = Vector3.zero;
 
-        transform.position = new Vector3(0f, 5f, 0f);
+        if (spawnConfig.useFixedSeed)
+            _spawnRng = new System.Random(spawnConfig.seedValue + _episodeIndex);
+        else
+            _spawnRng = null;
 
-        transform.rotation = Quaternion.Euler(
-            Random.Range(-maxSpawnTilt, maxSpawnTilt),
-            Random.Range(0f, 360f),
-            Random.Range(-maxSpawnTilt, maxSpawnTilt)
-        );
+        float x = SampleSym(spawnConfig.positionJitter.x);
+        float z = SampleSym(spawnConfig.positionJitter.z);
+        float y = spawnConfig.yBase + SampleSym(spawnConfig.yJitter);
+        y = Mathf.Max(y, spawnConfig.yMin);
+        transform.position = new Vector3(x, y, z);
+
+        float tiltX = SampleSym(spawnConfig.maxTiltDegrees);
+        float tiltZ = SampleSym(spawnConfig.maxTiltDegrees);
+        float yaw = spawnConfig.randomizeYaw ? SampleSym(spawnConfig.maxYawDegrees) : 0f;
+        transform.rotation = Quaternion.Euler(tiltX, yaw, tiltZ);
+
+        _rb.velocity = new Vector3(
+            SampleSym(spawnConfig.linearVelocityRange.x),
+            SampleSym(spawnConfig.linearVelocityRange.y),
+            SampleSym(spawnConfig.linearVelocityRange.z));
+
+        Vector3 angVelDeg = new Vector3(
+            SampleSym(spawnConfig.angularVelocityRange.x),
+            SampleSym(spawnConfig.angularVelocityRange.y),
+            SampleSym(spawnConfig.angularVelocityRange.z));
+        _rb.angularVelocity = angVelDeg * Mathf.Deg2Rad;
 
         // Give the agent a head start: spawn already hovering (counteract gravity on all motors).
-        _rb.velocity = new Vector3(
-            Random.Range(-0.5f, 0.5f),
-            Random.Range(-0.3f, 0.3f),
-            Random.Range(-0.5f, 0.5f));
         float hoverThrust = Mathf.Clamp01(
             (_rb.mass * Mathf.Abs(Physics.gravity.y)) / (4f * Mathf.Max(maxThrustPerMotor, 1e-6f)));
         for (int i = 0; i < 4; i++)
@@ -198,6 +233,16 @@ public class DroneBody : MonoBehaviour
             _actualThrusts[i] = hoverThrust;
             _lastMotorOutputs[i] = hoverThrust;
         }
+
+        _episodeIndex++;
+    }
+
+    private float SampleSym(float halfRange)
+    {
+        if (halfRange <= 0f) return 0f;
+        if (_spawnRng != null)
+            return (float)((_spawnRng.NextDouble() * 2.0 - 1.0) * halfRange);
+        return Random.Range(-halfRange, halfRange);
     }
 
     void ApplyDomainRandomizationForEpisode()
