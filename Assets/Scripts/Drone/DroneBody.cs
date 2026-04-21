@@ -65,6 +65,7 @@ public class DroneBody : MonoBehaviour
     private float _baseMaxThrustPerMotor;
     private float _baseMotorLagTimeConstant;
     private Vector3 _windForceWorld;
+    private Vector3 _homePosition;
 
 #if UNITY_EDITOR
     static bool s_LoggedAltitudeRaycastFallback;
@@ -122,9 +123,11 @@ public class DroneBody : MonoBehaviour
         // Keep PID gains/config in sync when both controllers exist (PPO drives physics; PID used for demos).
         GetComponent<PIDDroneController>()?.Initialize(cfg);
     }
+    
 
     void Start()
     {
+        _homePosition = transform.position;
         Debug.Log($"Starting velocity: {_rb.velocity}");
         Debug.Log($"Starting position: {transform.position}");
     }
@@ -181,7 +184,7 @@ public class DroneBody : MonoBehaviour
     {
         if (targetTransform != null)
             return targetTransform.position;
-        return new Vector3(0f, 5f, 0f);
+        return new Vector3(_homePosition.x, 5f, _homePosition.z);
     }
 
     /// <summary>Full state snapshot for expert controllers / Heuristic demo recording (same as physics loop).</summary>
@@ -202,8 +205,8 @@ public class DroneBody : MonoBehaviour
         else
             _spawnRng = null;
 
-        float x = SampleSym(spawnConfig.positionJitter.x);
-        float z = SampleSym(spawnConfig.positionJitter.z);
+        float x = _homePosition.x + SampleSym(spawnConfig.positionJitter.x);
+        float z = _homePosition.z + SampleSym(spawnConfig.positionJitter.z);
         float y = spawnConfig.yBase + SampleSym(spawnConfig.yJitter);
         y = Mathf.Max(y, spawnConfig.yMin);
         transform.position = new Vector3(x, y, z);
