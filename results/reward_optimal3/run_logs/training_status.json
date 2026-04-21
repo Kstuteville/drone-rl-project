@@ -5,58 +5,58 @@
     "DroneAgent": {
         "checkpoints": [
             {
-                "steps": 8499945,
-                "file_path": "results/reward_optimal3/DroneAgent/DroneAgent-8499945.onnx",
-                "reward": -8.755076938205296,
-                "creation_time": 1776022154.042188,
+                "steps": 8499676,
+                "file_path": "results/reward_optimal3/DroneAgent/DroneAgent-8499676.onnx",
+                "reward": 74.5521959697499,
+                "creation_time": 1776034555.846608,
                 "auxillary_file_paths": [
-                    "results/reward_optimal3/DroneAgent/DroneAgent-8499945.pt"
+                    "results/reward_optimal3/DroneAgent/DroneAgent-8499676.pt"
                 ]
             },
             {
-                "steps": 8999868,
-                "file_path": "results/reward_optimal3/DroneAgent/DroneAgent-8999868.onnx",
-                "reward": 45.3355982148129,
-                "creation_time": 1776022384.736042,
+                "steps": 8999625,
+                "file_path": "results/reward_optimal3/DroneAgent/DroneAgent-8999625.onnx",
+                "reward": 20.060686390740532,
+                "creation_time": 1776034847.885789,
                 "auxillary_file_paths": [
-                    "results/reward_optimal3/DroneAgent/DroneAgent-8999868.pt"
+                    "results/reward_optimal3/DroneAgent/DroneAgent-8999625.pt"
                 ]
             },
             {
-                "steps": 9499823,
-                "file_path": "results/reward_optimal3/DroneAgent/DroneAgent-9499823.onnx",
-                "reward": 15.007763114156603,
-                "creation_time": 1776022613.6045,
+                "steps": 9499896,
+                "file_path": "results/reward_optimal3/DroneAgent/DroneAgent-9499896.onnx",
+                "reward": 19.643010759353636,
+                "creation_time": 1776035139.5839,
                 "auxillary_file_paths": [
-                    "results/reward_optimal3/DroneAgent/DroneAgent-9499823.pt"
+                    "results/reward_optimal3/DroneAgent/DroneAgent-9499896.pt"
                 ]
             },
             {
-                "steps": 9999942,
-                "file_path": "results/reward_optimal3/DroneAgent/DroneAgent-9999942.onnx",
-                "reward": 24.952469271582526,
-                "creation_time": 1776022841.210536,
+                "steps": 9999830,
+                "file_path": "results/reward_optimal3/DroneAgent/DroneAgent-9999830.onnx",
+                "reward": 48.959318465288774,
+                "creation_time": 1776035438.331789,
                 "auxillary_file_paths": [
-                    "results/reward_optimal3/DroneAgent/DroneAgent-9999942.pt"
+                    "results/reward_optimal3/DroneAgent/DroneAgent-9999830.pt"
                 ]
             },
             {
-                "steps": 10000079,
-                "file_path": "results/reward_optimal3/DroneAgent/DroneAgent-10000079.onnx",
-                "reward": 24.576891009012858,
-                "creation_time": 1776022841.225548,
+                "steps": 10000342,
+                "file_path": "results/reward_optimal3/DroneAgent/DroneAgent-10000342.onnx",
+                "reward": 48.959318465288774,
+                "creation_time": 1776035438.357435,
                 "auxillary_file_paths": [
-                    "results/reward_optimal3/DroneAgent/DroneAgent-10000079.pt"
+                    "results/reward_optimal3/DroneAgent/DroneAgent-10000342.pt"
                 ]
             }
         ],
         "final_checkpoint": {
-            "steps": 10000079,
+            "steps": 10000342,
             "file_path": "results/reward_optimal3/DroneAgent.onnx",
-            "reward": 24.576891009012858,
-            "creation_time": 1776022841.225548,
+            "reward": 48.959318465288774,
+            "creation_time": 1776035438.357435,
             "auxillary_file_paths": [
-                "results/reward_optimal3/DroneAgent/DroneAgent-10000079.pt"
+                "results/reward_optimal3/DroneAgent/DroneAgent-10000342.pt"
             ]
         }
     },
