@@ -97,21 +97,24 @@ public class DroneBody : MonoBehaviour
         }
 
         var ppo = GetComponent<PPODroneController>();
-        if (ppo != null)
+        if (ppo != null && ppo.enabled)
             _controller = ppo;
         else
         {
-            var pid = GetComponent<PIDDroneController>();
-            _controller = pid;
+            var pid2 = GetComponent<PIDDroneController2>();
+            if (pid2 != null && pid2.enabled)
+                _controller = pid2;
         }
 
         if (_controller == null)
-            Debug.LogError("[DroneBody] No PPODroneController or PIDDroneController found on this GameObject!");
+        {
+            Debug.LogWarning("[DroneBody] No controller found — auto-adding PIDDroneController2.");
+            _controller = gameObject.AddComponent<PIDDroneController2>();
+        }
+        Debug.Log($"[DroneBody] Using controller: {_controller.GetType().Name}");
 
         var cfg = BuildConfig();
         _controller?.Initialize(cfg);
-        // Keep PID gains/config in sync when both controllers exist (PPO drives physics; PID used for demos).
-        GetComponent<PIDDroneController>()?.Initialize(cfg);
     }
 
     void Start()
@@ -238,7 +241,6 @@ public class DroneBody : MonoBehaviour
 
         var cfg = BuildConfig();
         _controller?.Initialize(cfg);
-        GetComponent<PIDDroneController>()?.Initialize(cfg);
     }
 
     /// <summary>AGL via downward raycast; skips this drone's colliders; falls back to world Y if no ground hit.</summary>

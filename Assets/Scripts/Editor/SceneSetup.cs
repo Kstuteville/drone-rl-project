@@ -82,8 +82,8 @@ public static class SceneSetup
         // ─── Add Peter's architecture components ───
         if (drone.GetComponent<DroneBody>() == null)
             drone.AddComponent<DroneBody>();
-        if (drone.GetComponent<PIDDroneController>() == null)
-            drone.AddComponent<PIDDroneController>();
+        if (drone.GetComponent<PIDDroneController2>() == null)
+            drone.AddComponent<PIDDroneController2>();
 
         DroneBody droneBody = drone.GetComponent<DroneBody>();
 
@@ -147,7 +147,7 @@ public static class SceneSetup
 
         EditorSceneManager.MarkSceneDirty(EditorSceneManager.GetActiveScene());
         Debug.Log("[SceneSetup] Drone test scene created with Jessenth's prefab. " +
-            "Components wired: DroneBody + PIDDroneController + TestPlanner + DroneReset + " +
+            "Components wired: DroneBody + PIDDroneController2 + TestPlanner + DroneReset + " +
             "RotorSpin (x4) + DroneCamera + DroneHUD. Hit Play to test PID hover.");
     }
 
@@ -171,7 +171,7 @@ public static class SceneSetup
         rb.useGravity = true;
 
         drone.AddComponent<DroneBody>();
-        drone.AddComponent<PIDDroneController>();
+        drone.AddComponent<PIDDroneController2>();
 
         TestPlanner planner = drone.AddComponent<TestPlanner>();
         planner.drone = drone.GetComponent<DroneBody>();

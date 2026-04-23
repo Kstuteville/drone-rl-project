@@ -206,11 +206,11 @@ public class PPODroneController : Agent, IDroneController
         if (!s_LoggedPidPresence)
         {
             s_LoggedPidPresence = true;
-            bool hasPid = GetComponent<PIDDroneController>() != null;
-            Debug.Log($"[PPODroneDebug] Heuristic first call: DroneBody={(_droneBody != null)} PIDDroneController found={hasPid}");
+            bool hasPid = GetComponent<PIDDroneController2>() != null;
+            Debug.Log($"[PPODroneDebug] Heuristic first call: DroneBody={(_droneBody != null)} PIDDroneController2 found={hasPid}");
         }
 
-        if (_droneBody == null || !TryGetComponent<PIDDroneController>(out var pid))
+        if (_droneBody == null || !TryGetComponent<PIDDroneController2>(out var pid))
         {
             for (int i = 0; i < 4; i++)
                 c[i] = 0f;
