@@ -56,5 +56,5 @@
         "temp/": true,
         "Temp/": true
     },
-    "dotnet.defaultSolution": "DroneRL_2022.sln"
+    "dotnet.defaultSolution": "drone-rl-project.sln"
 }

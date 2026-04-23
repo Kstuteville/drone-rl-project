@@ -2687,6 +2687,18 @@ MonoBehaviour:
   drawMotorForces: 1
   randomizeSpawnOnEpisodeBegin: 1
   maxSpawnTilt: 1
+  spawnConfig:
+    positionJitter: {x: 0, y: 0, z: 0}
+    yBase: 5
+    yJitter: 0
+    yMin: 1.5
+    maxTiltDegrees: 10
+    randomizeYaw: 1
+    maxYawDegrees: 180
+    linearVelocityRange: {x: 0.5, y: 0.3, z: 0.5}
+    angularVelocityRange: {x: 0, y: 0, z: 0}
+    useFixedSeed: 0
+    seedValue: 0
 --- !u!1 &889675491
 GameObject:
   m_ObjectHideFlags: 0
@@ -3555,6 +3567,18 @@ MonoBehaviour:
   drawMotorForces: 1
   randomizeSpawnOnEpisodeBegin: 1
   maxSpawnTilt: 1
+  spawnConfig:
+    positionJitter: {x: 0, y: 0, z: 0}
+    yBase: 5
+    yJitter: 0
+    yMin: 1.5
+    maxTiltDegrees: 10
+    randomizeYaw: 1
+    maxYawDegrees: 180
+    linearVelocityRange: {x: 0.5, y: 0.3, z: 0.5}
+    angularVelocityRange: {x: 0, y: 0, z: 0}
+    useFixedSeed: 0
+    seedValue: 0
 --- !u!1 &992710029
 GameObject:
   m_ObjectHideFlags: 0
@@ -4112,6 +4136,18 @@ MonoBehaviour:
   drawMotorForces: 1
   randomizeSpawnOnEpisodeBegin: 1
   maxSpawnTilt: 1
+  spawnConfig:
+    positionJitter: {x: 0, y: 0, z: 0}
+    yBase: 5
+    yJitter: 0
+    yMin: 1.5
+    maxTiltDegrees: 10
+    randomizeYaw: 1
+    maxYawDegrees: 180
+    linearVelocityRange: {x: 0.5, y: 0.3, z: 0.5}
+    angularVelocityRange: {x: 0, y: 0, z: 0}
+    useFixedSeed: 0
+    seedValue: 0
 --- !u!1 &1133738790
 GameObject:
   m_ObjectHideFlags: 0
@@ -4666,6 +4702,18 @@ MonoBehaviour:
   drawMotorForces: 1
   randomizeSpawnOnEpisodeBegin: 1
   maxSpawnTilt: 1
+  spawnConfig:
+    positionJitter: {x: 0, y: 0, z: 0}
+    yBase: 5
+    yJitter: 0
+    yMin: 1.5
+    maxTiltDegrees: 10
+    randomizeYaw: 1
+    maxYawDegrees: 180
+    linearVelocityRange: {x: 0.5, y: 0.3, z: 0.5}
+    angularVelocityRange: {x: 0, y: 0, z: 0}
+    useFixedSeed: 0
+    seedValue: 0
 --- !u!1 &1204240884
 GameObject:
   m_ObjectHideFlags: 0
@@ -5328,6 +5376,18 @@ MonoBehaviour:
   drawMotorForces: 1
   randomizeSpawnOnEpisodeBegin: 1
   maxSpawnTilt: 1
+  spawnConfig:
+    positionJitter: {x: 0, y: 0, z: 0}
+    yBase: 5
+    yJitter: 0
+    yMin: 1.5
+    maxTiltDegrees: 10
+    randomizeYaw: 1
+    maxYawDegrees: 180
+    linearVelocityRange: {x: 0.5, y: 0.3, z: 0.5}
+    angularVelocityRange: {x: 0, y: 0, z: 0}
+    useFixedSeed: 0
+    seedValue: 0
 --- !u!1001 &1359237511
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5601,7 +5661,7 @@ MonoBehaviour:
     VectorActionDescriptions: []
     VectorActionSpaceType: 1
     hasUpgradedBrainParametersWithActionSpec: 1
-  m_Model: {fileID: 0}
+  m_Model: {fileID: 5022602860645237092, guid: 9018b33930c8f49538984153a9bc25dd, type: 3}
   m_InferenceDevice: 0
   m_BehaviorType: 1
   m_BehaviorName: DroneAgent
@@ -5637,6 +5697,18 @@ MonoBehaviour:
   drawMotorForces: 1
   randomizeSpawnOnEpisodeBegin: 1
   maxSpawnTilt: 1
+  spawnConfig:
+    positionJitter: {x: 0, y: 0, z: 0}
+    yBase: 5
+    yJitter: 0
+    yMin: 1.5
+    maxTiltDegrees: 10
+    randomizeYaw: 1
+    maxYawDegrees: 180
+    linearVelocityRange: {x: 0.5, y: 0.3, z: 0.5}
+    angularVelocityRange: {x: 0, y: 0, z: 0}
+    useFixedSeed: 0
+    seedValue: 0
 --- !u!1 &1393278064
 GameObject:
   m_ObjectHideFlags: 0
@@ -6157,6 +6229,18 @@ MonoBehaviour:
   drawMotorForces: 1
   randomizeSpawnOnEpisodeBegin: 1
   maxSpawnTilt: 1
+  spawnConfig:
+    positionJitter: {x: 0, y: 0, z: 0}
+    yBase: 5
+    yJitter: 0
+    yMin: 1.5
+    maxTiltDegrees: 10
+    randomizeYaw: 1
+    maxYawDegrees: 180
+    linearVelocityRange: {x: 0.5, y: 0.3, z: 0.5}
+    angularVelocityRange: {x: 0, y: 0, z: 0}
+    useFixedSeed: 0
+    seedValue: 0
 --- !u!1 &1459861972
 GameObject:
   m_ObjectHideFlags: 0
@@ -6807,7 +6891,7 @@ MonoBehaviour:
     VectorActionDescriptions: []
     VectorActionSpaceType: 1
     hasUpgradedBrainParametersWithActionSpec: 1
-  m_Model: {fileID: 0}
+  m_Model: {fileID: 5022602860645237092, guid: 9018b33930c8f49538984153a9bc25dd, type: 3}
   m_InferenceDevice: 0
   m_BehaviorType: 1
   m_BehaviorName: DroneAgent
@@ -6843,6 +6927,18 @@ MonoBehaviour:
   drawMotorForces: 1
   randomizeSpawnOnEpisodeBegin: 1
   maxSpawnTilt: 1
+  spawnConfig:
+    positionJitter: {x: 0, y: 0, z: 0}
+    yBase: 5
+    yJitter: 0
+    yMin: 1.5
+    maxTiltDegrees: 10
+    randomizeYaw: 1
+    maxYawDegrees: 180
+    linearVelocityRange: {x: 0.5, y: 0.3, z: 0.5}
+    angularVelocityRange: {x: 0, y: 0, z: 0}
+    useFixedSeed: 0
+    seedValue: 0
 --- !u!54 &1774341668 stripped
 Rigidbody:
   m_CorrespondingSourceObject: {fileID: 714713444777072426, guid: aceef1537002b5c4a8bf9f1d433d9361, type: 3}

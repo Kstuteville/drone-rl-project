@@ -1668,15 +1668,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 959016819}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0fef1deee92840d4fb89a7a48d50f03c, type: 3}
+  m_Script: {fileID: 11500000, guid: 18879230a86d1491382e7cb714ed05d2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  leftFPS: {fileID: 791893065}
-  leftGun: {fileID: 1040311351}
-  leftCamera: {fileID: 1040311350}
-  rightFPS: {fileID: 1587492104}
-  rightGun: {fileID: 509282641}
-  rightCamera: {fileID: 509282640}
+  leftFPS: {fileID: 0}
+  leftGun: {fileID: 0}
+  leftCamera: {fileID: 0}
+  rightFPS: {fileID: 0}
+  rightGun: {fileID: 0}
+  rightCamera: {fileID: 0}
   switchKey: 121
 --- !u!4 &959016821
 Transform:
@@ -3080,6 +3080,18 @@ MonoBehaviour:
   drawMotorForces: 1
   randomizeSpawnOnEpisodeBegin: 1
   maxSpawnTilt: 10
+  spawnConfig:
+    positionJitter: {x: 0, y: 0, z: 0}
+    yBase: 5
+    yJitter: 0
+    yMin: 1.5
+    maxTiltDegrees: 10
+    randomizeYaw: 1
+    maxYawDegrees: 180
+    linearVelocityRange: {x: 0.5, y: 0.3, z: 0.5}
+    angularVelocityRange: {x: 0, y: 0, z: 0}
+    useFixedSeed: 0
+    seedValue: 0
 --- !u!54 &1450438052
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -5463,6 +5475,18 @@ MonoBehaviour:
   drawMotorForces: 1
   randomizeSpawnOnEpisodeBegin: 1
   maxSpawnTilt: 10
+  spawnConfig:
+    positionJitter: {x: 0, y: 0, z: 0}
+    yBase: 5
+    yJitter: 0
+    yMin: 1.5
+    maxTiltDegrees: 10
+    randomizeYaw: 1
+    maxYawDegrees: 180
+    linearVelocityRange: {x: 0.5, y: 0.3, z: 0.5}
+    angularVelocityRange: {x: 0, y: 0, z: 0}
+    useFixedSeed: 0
+    seedValue: 0
 --- !u!65 &4943105396364140936
 BoxCollider:
   m_ObjectHideFlags: 0
