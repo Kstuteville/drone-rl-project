@@ -1083,7 +1083,7 @@ GameObject:
   - component: {fileID: 754309264}
   m_Layer: 0
   m_Name: Plane
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2295,7 +2295,7 @@ GameObject:
   - component: {fileID: 1271337105}
   m_Layer: 0
   m_Name: Cube (2)
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2428,7 +2428,7 @@ GameObject:
   - component: {fileID: 1332011281}
   m_Layer: 0
   m_Name: Cube
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3251,7 +3251,7 @@ CharacterController:
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 3
   m_Height: 2
   m_Radius: 0.5
@@ -3861,7 +3861,7 @@ GameObject:
   - component: {fileID: 2132705912}
   m_Layer: 0
   m_Name: Cube (1)
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5402,7 +5402,7 @@ Transform:
   m_GameObject: {fileID: 7827646426877532044}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -20, y: 5.3, z: -3.45}
+  m_LocalPosition: {x: -20, y: 7.478, z: -3.45}
   m_LocalScale: {x: 0.6, y: 0.1, z: 0.6}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -6348,6 +6348,7 @@ GameObject:
   - component: {fileID: 4588926519469726155}
   - component: {fileID: 4306190719282973282}
   - component: {fileID: 8678120232368924914}
+  - component: {fileID: 8678120232368924915}
   m_Layer: 0
   m_Name: PID_Drone
   m_TagString: Untagged
@@ -6664,69 +6665,32 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e173a32a89a2a8443bf5694311557778, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  velocityXZ:
-    kP: 2
-    kI: 0.1
-    kD: 0.5
-  velocityY:
-    kP: 3
-    kI: 0.2
-    kD: 0.8
-  rollGains:
-    kP: 5
-    kI: 0.1
-    kD: 1.5
-  pitchGains:
-    kP: 5
-    kI: 0.1
-    kD: 1.5
-  yawGains:
+  liftGains:
+    kP: 1
+    kI: 0
+    kD: 0.2
+  attitudeGains:
     kP: 3
     kI: 0
-    kD: 0.5
-  rollRateGains:
+    kD: 0
+  rateGains:
     kP: 0.8
     kI: 0.05
-    kD: 0.15
-  pitchRateGains:
-    kP: 0.8
-    kI: 0.05
-    kD: 0.15
-  yawRateGains:
-    kP: 0.5
-    kI: 0
     kD: 0.1
-  recoveryAngularVelocityThreshold: 1.5
-  recoveryDampingMultiplier: 4
-  recoveryBlendRate: 12
-  recoveryHoldTime: 0.5
-  instantRecoveryResponse: 1
-  maxCorrectableAngularVelocity: 15
-  recoveryAltitudeBoost: 0.15
-  stabilizeFirstDuringRecovery: 1
-  recoverySettleRate: 3
-  maxTiltCommandRate: 90
-  maxRateCommandRate: 5
-  velocityIntegralLimit: 5
-  attitudeIntegralLimit: 10
-  rateIntegralLimit: 5
-  velocityDerivativeFilter: 0.3
-  rateDerivativeFilter: 0.4
-  maxTiltAngle: 30
-  maxAngularVelocity: 6
-  tiltBoostFactor: 1
-  velocityDeadband: 0.1
-  angleDeadband: 0.5
-  _debugRecoveryBlend: 0
-  _debugAngularSpeed: 0
-  _debugVelocityError: {x: 0, y: 0, z: 0}
-  _debugIsStabilizing: 0
-  _debugStabilizationProgress: 0
-  _debugRecoveryTimer: 0
-  _showDebugGizmos: 1
-  _velocityColor: {r: 0, g: 0, b: 1, a: 1}
-  _angularVelColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
-  _gizmoScale: 0.5
+--- !u!114 &8678120232368924915
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7827646426877532044}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ab1fc6d30024df44d858f341366612f1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  groundTag: Ground
+  keepLastSeconds: 10
 --- !u!114 &8710200003152695315
 MonoBehaviour:
   m_ObjectHideFlags: 0
