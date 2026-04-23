@@ -905,7 +905,6 @@ MonoBehaviour:
   bulletPrefab: {fileID: 5363653975571772103, guid: f2eb82940bf60164da60e6d1e4f66540, type: 3}
   bulletSpeed: 80
   fireRate: 3
-  isActive: 1
 --- !u!114 &509282642
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1318,7 +1317,6 @@ MonoBehaviour:
   sprintSpeed: 20
   mouseSensitivity: 2
   playerCamera: {fileID: 1040311350}
-  isActive: 1
 --- !u!143 &791893066
 CharacterController:
   m_ObjectHideFlags: 0
@@ -1781,7 +1779,6 @@ MonoBehaviour:
   bulletPrefab: {fileID: 5363653975571772103, guid: f2eb82940bf60164da60e6d1e4f66540, type: 3}
   bulletSpeed: 80
   fireRate: 3
-  isActive: 1
 --- !u!114 &1040311352
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3228,7 +3225,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1587492103}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4b71efb40e00ba848a66c4eb5165a48a, type: 3}
   m_Name: 
@@ -3237,7 +3234,6 @@ MonoBehaviour:
   sprintSpeed: 20
   mouseSensitivity: 2
   playerCamera: {fileID: 509282640}
-  isActive: 1
 --- !u!143 &1587492105
 CharacterController:
   m_ObjectHideFlags: 0
@@ -3255,7 +3251,7 @@ CharacterController:
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_Height: 2
   m_Radius: 0.5
