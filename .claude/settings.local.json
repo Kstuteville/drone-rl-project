@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(grep -E \"\\\\.\\(yaml|yml|md|txt|json|py\\)$\")",
+      "Bash(ls Assets/*.onnx.meta)",
+      "Bash(ls Assets/*.onnx)",
+      "Bash(git checkout *)",
+      "Bash(git commit -m ' *)"
+    ]
+  }
+}
