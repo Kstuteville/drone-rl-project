@@ -1310,7 +1310,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 791893064}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4b71efb40e00ba848a66c4eb5165a48a, type: 3}
+  m_Script: {fileID: 11500000, guid: 931c7addfd75a44ab820cd91d61252ab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 10
@@ -1652,6 +1652,7 @@ GameObject:
   m_Component:
   - component: {fileID: 959016821}
   - component: {fileID: 959016820}
+  - component: {fileID: 959016822}
   m_Layer: 0
   m_Name: SplitScreen
   m_TagString: Untagged
@@ -1693,6 +1694,25 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &959016822
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 959016819}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 18879230a86d1491382e7cb714ed05d2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  leftFPS: {fileID: 791893065}
+  leftGun: {fileID: 1040311351}
+  leftCamera: {fileID: 0}
+  rightFPS: {fileID: 1587492104}
+  rightGun: {fileID: 509282641}
+  rightCamera: {fileID: 0}
+  switchKey: 121
 --- !u!1 &1040311349
 GameObject:
   m_ObjectHideFlags: 0
@@ -3044,7 +3064,7 @@ MonoBehaviour:
     VectorActionDescriptions: []
     VectorActionSpaceType: 1
     hasUpgradedBrainParametersWithActionSpec: 1
-  m_Model: {fileID: 5022602860645237092, guid: 4c42813869a36ba49a80efa0f5abf823, type: 3}
+  m_Model: {fileID: 5022602860645237092, guid: 5a92ee9f075df4c99bfc1a8781368a2f, type: 3}
   m_InferenceDevice: 0
   m_BehaviorType: 0
   m_BehaviorName: DroneAgent
@@ -3074,7 +3094,7 @@ MonoBehaviour:
   motorLagTimeConstant: 0.05
   linearDragCoeff: 0.5
   angularDragCoeff: 2
-  motorsActive: 01010101
+  motorsActive: 01000101
   targetVelocity: {x: 0, y: 0, z: 0}
   targetTransform: {fileID: 0}
   drawMotorForces: 1
@@ -3239,7 +3259,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1587492103}
   m_Enabled: 0
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4b71efb40e00ba848a66c4eb5165a48a, type: 3}
+  m_Script: {fileID: 11500000, guid: 931c7addfd75a44ab820cd91d61252ab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 10
@@ -5692,7 +5712,7 @@ MonoBehaviour:
     VectorActionDescriptions: []
     VectorActionSpaceType: 1
     hasUpgradedBrainParametersWithActionSpec: 1
-  m_Model: {fileID: 5022602860645237092, guid: 4c42813869a36ba49a80efa0f5abf823, type: 3}
+  m_Model: {fileID: 5022602860645237092, guid: 9018b33930c8f49538984153a9bc25dd, type: 3}
   m_InferenceDevice: 0
   m_BehaviorType: 0
   m_BehaviorName: DroneAgent
@@ -6685,72 +6705,21 @@ MonoBehaviour:
   m_GameObject: {fileID: 7827646426877532044}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e173a32a89a2a8443bf5694311557778, type: 3}
+  m_Script: {fileID: 11500000, guid: 54db792aac1fc4c1b9dba0f5756f2992, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  velocityXZ:
-    kP: 2
-    kI: 0.1
-    kD: 0.5
-  velocityY:
-    kP: 3
-    kI: 0.2
-    kD: 0.8
-  rollGains:
-    kP: 5
-    kI: 0.1
-    kD: 1.5
-  pitchGains:
-    kP: 5
-    kI: 0.1
-    kD: 1.5
-  yawGains:
-    kP: 3
+  liftGains:
+    kP: 1.5
+    kI: 0.4
+    kD: 0.2
+  attitudeGains:
+    kP: 3.5
     kI: 0
-    kD: 0.5
-  rollRateGains:
-    kP: 0.8
-    kI: 0.05
-    kD: 0.15
-  pitchRateGains:
-    kP: 0.8
-    kI: 0.05
-    kD: 0.15
-  yawRateGains:
-    kP: 0.5
-    kI: 0
-    kD: 0.1
-  recoveryAngularVelocityThreshold: 1.5
-  recoveryDampingMultiplier: 4
-  recoveryBlendRate: 12
-  recoveryHoldTime: 0.5
-  instantRecoveryResponse: 1
-  maxCorrectableAngularVelocity: 15
-  recoveryAltitudeBoost: 0.15
-  stabilizeFirstDuringRecovery: 1
-  recoverySettleRate: 3
-  maxTiltCommandRate: 90
-  maxRateCommandRate: 5
-  velocityIntegralLimit: 5
-  attitudeIntegralLimit: 10
-  rateIntegralLimit: 5
-  velocityDerivativeFilter: 0.3
-  rateDerivativeFilter: 0.4
-  maxTiltAngle: 30
-  maxAngularVelocity: 6
-  tiltBoostFactor: 1
-  velocityDeadband: 0.1
-  angleDeadband: 0.5
-  _debugRecoveryBlend: 0
-  _debugAngularSpeed: 0
-  _debugVelocityError: {x: 0, y: 0, z: 0}
-  _debugIsStabilizing: 0
-  _debugStabilizationProgress: 0
-  _debugRecoveryTimer: 0
-  _showDebugGizmos: 1
-  _velocityColor: {r: 0, g: 0, b: 1, a: 1}
-  _angularVelColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
-  _gizmoScale: 0.5
+    kD: 0
+  rateGains:
+    kP: 0.7
+    kI: 0.1
+    kD: 0.4
 --- !u!114 &8710200003152695315
 MonoBehaviour:
   m_ObjectHideFlags: 0
