@@ -1,0 +1,29 @@
+{
+    "DroneAgent": {
+        "checkpoints": [
+            {
+                "steps": 154551,
+                "file_path": "results/DroneStage2_TiltOnly3/DroneAgent/DroneAgent-154551.onnx",
+                "reward": 0.13236635370808567,
+                "creation_time": 1775778750.5683808,
+                "auxillary_file_paths": [
+                    "results/DroneStage2_TiltOnly3/DroneAgent/DroneAgent-154551.pt"
+                ]
+            }
+        ],
+        "final_checkpoint": {
+            "steps": 154551,
+            "file_path": "results/DroneStage2_TiltOnly3/DroneAgent.onnx",
+            "reward": 0.13236635370808567,
+            "creation_time": 1775778750.5683808,
+            "auxillary_file_paths": [
+                "results/DroneStage2_TiltOnly3/DroneAgent/DroneAgent-154551.pt"
+            ]
+        }
+    },
+    "metadata": {
+        "stats_format_version": "0.3.0",
+        "mlagents_version": "0.30.0",
+        "torch_version": "1.11.0"
+    }
+}

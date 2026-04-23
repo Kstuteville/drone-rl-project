@@ -1,0 +1,47 @@
+{
+    "name": "root",
+    "metadata": {
+        "timer_format_version": "0.1.0",
+        "start_time_seconds": "1775946027",
+        "python_version": "3.9.25 (main, Oct 31 2025, 18:40:52) \n[Clang 17.0.0 (clang-1700.6.3.2)]",
+        "command_line_arguments": "/Users/kayliestuteville/Documents/drone-rl-project/venv/bin/mlagents-learn config/drone_training.yaml --run-id=DroneStage1_V2 --force",
+        "mlagents_version": "0.30.0",
+        "mlagents_envs_version": "0.30.0",
+        "communication_protocol_version": "1.5.0",
+        "pytorch_version": "1.11.0",
+        "numpy_version": "1.21.2",
+        "end_time_seconds": "1775946037"
+    },
+    "total": 9.956696208,
+    "count": 1,
+    "self": 0.006905251000000945,
+    "children": {
+        "run_training.setup": {
+            "total": 0.014577665999999989,
+            "count": 1,
+            "self": 0.014577665999999989
+        },
+        "TrainerController.start_learning": {
+            "total": 9.935213291,
+            "count": 1,
+            "self": 0.0004164160000001971,
+            "children": {
+                "TrainerController._reset_env": {
+                    "total": 9.934784875,
+                    "count": 1,
+                    "self": 9.934784875
+                },
+                "trainer_threads": {
+                    "total": 9.999999992515995e-07,
+                    "count": 1,
+                    "self": 9.999999992515995e-07
+                },
+                "TrainerController._save_models": {
+                    "total": 1.100000000064938e-05,
+                    "count": 1,
+                    "self": 1.100000000064938e-05
+                }
+            }
+        }
+    }
+}

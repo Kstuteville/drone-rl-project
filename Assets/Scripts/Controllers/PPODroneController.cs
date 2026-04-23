@@ -183,9 +183,9 @@ public class PPODroneController : Agent, IDroneController
         float worldY = _droneBody != null ? _droneBody.transform.position.y : transform.position.y;
         if (tiltAngle > 80f || worldY < 0.5f || worldY > 20f)
         {
-            Debug.Log($"[CRASH] {gameObject.name} alt={_latestState.altitude:F3} tilt={Vector3.Angle(Vector3.up, _latestState.orientation * Vector3.up):F1} vel={_latestState.velocity} motors=[{_motorOutputs[0]:F3},{_motorOutputs[1]:F3},{_motorOutputs[2]:F3},{_motorOutputs[3]:F3}] step={StepCount}");
+            Debug.Log($"[CRASH] alt={_latestState.altitude:F3} tilt={Vector3.Angle(Vector3.up, _latestState.orientation * Vector3.up):F1} vel={_latestState.velocity} motors=[{_motorOutputs[0]:F3},{_motorOutputs[1]:F3},{_motorOutputs[2]:F3},{_motorOutputs[3]:F3}] step={StepCount}");
             AddReward(-10f);
-            // EndEpisode(); // disabled for turret testing
+            EndEpisode();
         }
 
         // TEMP debug: throttle with agent step counter (ML-Agents StepCount).

@@ -1,0 +1,38 @@
+{
+    "DroneAgent": {
+        "checkpoints": [
+            {
+                "steps": 499697,
+                "file_path": "results/DroneStage2_NoWalls/DroneAgent/DroneAgent-499697.onnx",
+                "reward": 881.536674118042,
+                "creation_time": 1775772712.140481,
+                "auxillary_file_paths": [
+                    "results/DroneStage2_NoWalls/DroneAgent/DroneAgent-499697.pt"
+                ]
+            },
+            {
+                "steps": 588032,
+                "file_path": "results/DroneStage2_NoWalls/DroneAgent/DroneAgent-588032.onnx",
+                "reward": null,
+                "creation_time": 1775772881.410895,
+                "auxillary_file_paths": [
+                    "results/DroneStage2_NoWalls/DroneAgent/DroneAgent-588032.pt"
+                ]
+            }
+        ],
+        "final_checkpoint": {
+            "steps": 588032,
+            "file_path": "results/DroneStage2_NoWalls/DroneAgent.onnx",
+            "reward": null,
+            "creation_time": 1775772881.410895,
+            "auxillary_file_paths": [
+                "results/DroneStage2_NoWalls/DroneAgent/DroneAgent-588032.pt"
+            ]
+        }
+    },
+    "metadata": {
+        "stats_format_version": "0.3.0",
+        "mlagents_version": "0.30.0",
+        "torch_version": "1.11.0"
+    }
+}
