@@ -15,14 +15,18 @@ public class FPSController : MonoBehaviour
     private float _pitch = 0f;
     private float _yaw = 0f;
 
-    void Start()
+    void Awake()
     {
         _cc = GetComponent<CharacterController>();
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
-
         if (playerCamera == null)
             playerCamera = GetComponentInChildren<Camera>();
+        _yaw = transform.localEulerAngles.y;
+    }
+
+    void OnEnable()
+    {
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
     }
 
     void Update()

@@ -74,7 +74,7 @@ public class PIDDroneController2 : MonoBehaviour, IDroneController
     [Tooltip("Maximum angular velocity the controller will try to correct (rad/s)")]
     public float maxCorrectableAngularVelocity = 15f;
     [Tooltip("Thrust boost during recovery to maintain altitude")]
-    public float recoveryAltitudeBoost = 0.15f;
+    public float recoveryAltitudeBoost = 0.25f;
 
     [Header("Stabilization Priority")]
     [Tooltip("When true, ignores velocity commands during recovery and focuses on stabilization")]
@@ -136,8 +136,8 @@ public class PIDDroneController2 : MonoBehaviour, IDroneController
     private float _rollRateDerivFiltered, _pitchRateDerivFiltered, _yawRateDerivFiltered;
 
     // Command smoothing
-    private float _rollCmdPrev, _pitchCmdPrev;
-    private float _rollRateCmdPrev, _pitchRateCmdPrev;
+    private float _rollCmdPrev, _pitchCmdPrev, _yawCmdPrev;
+    private float _rollRateCmdPrev, _pitchRateCmdPrev, _yawRateCmdPrev;
 
     // Recovery mode state
     private float _recoveryBlend = 0f;
@@ -173,8 +173,8 @@ public class PIDDroneController2 : MonoBehaviour, IDroneController
         _yawRateIntegral = _yawRatePrev = 0f;
         _rollRateDerivFiltered = _pitchRateDerivFiltered = _yawRateDerivFiltered = 0f;
 
-        _rollCmdPrev = _pitchCmdPrev = 0f;
-        _rollRateCmdPrev = _pitchRateCmdPrev = 0f;
+        _rollCmdPrev = _pitchCmdPrev = _yawCmdPrev = 0f;
+        _rollRateCmdPrev = _pitchRateCmdPrev = _yawRateCmdPrev = 0f;
 
         _recoveryBlend = 0f;
         _lastAngularVelocity = Vector3.zero;
@@ -399,16 +399,14 @@ public class PIDDroneController2 : MonoBehaviour, IDroneController
 
         if (shouldBeInRecovery)
         {
-            // Enter or stay in recovery
-            _recoveryBlend = Mathf.Lerp(_recoveryBlend, 1f, recoveryBlendRate * dt);
-            _recoveryTimer = recoveryHoldTime;
-
-            // Check if angular velocity is too high (unrecoverable)
-            if (angularSpeed > maxCorrectableAngularVelocity)
-            {
-                // Still try to damp, but acknowledge we're in a critical state
+            // Snap immediately to full recovery on first detection if enabled,
+            // otherwise lerp in — avoids wasting 3 physics frames while drone tumbles
+            if (instantRecoveryResponse && _recoveryBlend < 0.5f)
                 _recoveryBlend = 1f;
-            }
+            else
+                _recoveryBlend = Mathf.Lerp(_recoveryBlend, 1f, recoveryBlendRate * dt);
+
+            _recoveryTimer = recoveryHoldTime;
         }
         else
         {
@@ -537,40 +535,22 @@ public class PIDDroneController2 : MonoBehaviour, IDroneController
         t[2] = collective + rollMix - pitchMix + yawCorr; // RL
         t[3] = collective - rollMix - pitchMix - yawCorr; // RR
 
-        // Recovery braking: add differential thrust to actively counteract rotation
+        // Recovery braking: differential thrust to counter angular velocity.
+        // Body frame: X=roll, Y=yaw, Z=pitch. Never reduce collective — that kills altitude.
         if (_recoveryBlend > 0.3f)
         {
-            // Calculate how much each motor should contribute to counteracting rotation
-            float brakingIntensity = _recoveryBlend * 0.5f;
-
-            // Get the dominant rotation axis and apply counter-thrust
             Vector3 angVel = _lastAngularVelocity;
+            float scale = _recoveryBlend * 0.25f;
 
-            // For roll (rotation around X axis): adjust FL/FR vs RL/RR
-            // For pitch (rotation around Y axis): adjust FL/RL vs FR/RR
-            // For yaw (rotation around Z axis): adjust diagonals
+            float rollBrake  = -angVel.x * scale; // X axis = roll
+            float pitchBrake = -angVel.z * scale; // Z axis = pitch
+            float yawBrake   = -angVel.y * scale * 0.5f; // Y axis = yaw (weaker)
 
-            float rollBraking = angVel.x * 0.25f; // Counter-roll with differential front/back
-            float pitchBraking = angVel.y * 0.25f; // Counter-pitch with differential left/right
-
-            // Differential braking for yaw (opposite corners)
-            float yawBrakingFL = angVel.z * 0.15f;
-            float yawBrakingRR = angVel.z * 0.15f;
-
-            t[0] += rollBraking + pitchBraking - yawBrakingFL; // FL: counter roll right + pitch right + yaw CCW
-            t[1] += rollBraking - pitchBraking + yawBrakingFL; // FR: counter roll right + pitch left + yaw CW
-            t[2] += -rollBraking + pitchBraking - yawBrakingRR; // RL: counter roll left + pitch right + yaw CCW
-            t[3] += -rollBraking - pitchBraking + yawBrakingRR; // RR: counter roll left + pitch left + yaw CW
-
-            // Apply overall braking force to reduce total lift (helps with rapid deceleration)
-            if (_recoveryBlend > 0.6f)
-            {
-                float brakeAmount = (_recoveryBlend - 0.6f) * 0.4f;
-                t[0] -= brakeAmount;
-                t[1] -= brakeAmount;
-                t[2] -= brakeAmount;
-                t[3] -= brakeAmount;
-            }
+            // Standard X config: FL(0) FR(1) RL(2) RR(3)
+            t[0] += -rollBrake + pitchBrake - yawBrake;
+            t[1] +=  rollBrake + pitchBrake + yawBrake;
+            t[2] += -rollBrake - pitchBrake + yawBrake;
+            t[3] +=  rollBrake - pitchBrake - yawBrake;
         }
 
         // Motor failure compensation
