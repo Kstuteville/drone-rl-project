@@ -102,3 +102,5 @@ venv/
 # ML-Agents runtime profiler output (local paths, hub tokens, noisy diffs every play/train)
 Assets/ML-Agents/Timers/*.json
 Assets/ML-Agents/Timers/*.json.meta
+Assets/Demonstrations/*.demo
+Assets/Demonstrations/*.demo.meta
