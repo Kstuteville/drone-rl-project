@@ -11,36 +11,23 @@ public class TurretController : MonoBehaviour
     public float fireRate = 1.5f;
     public float bulletSpeed = 40f;
 
-    [Header("Aiming")]
-    public bool leadTarget = true;
-    [Tooltip("Random spread radius in meters — 0 = perfect aim, 0.5 = realistic inaccuracy")]
-    public float aimSpread = 0.4f;
-
     private float _fireCooldown;
-    private DroneBody _lastTarget;
 
     void Update()
     {
-        DroneBody target = FindNearestDroneExcluding(_lastTarget);
-        if (target == null)
-            target = FindNearestDroneExcluding(null);
-
+        DroneBody target = FindNearestDrone();
         if (target == null)
             return;
-
-        Vector3 cleanTarget = leadTarget ? PredictPosition(target) : target.transform.position;
 
         _fireCooldown -= Time.deltaTime;
         if (_fireCooldown <= 0f)
         {
-            Vector3 aimPos = cleanTarget + UnityEngine.Random.insideUnitSphere * aimSpread;
-            Fire(aimPos);
-            _lastTarget = target;
+            Fire(target.transform.position);
             _fireCooldown = 1f / fireRate;
         }
     }
 
-    DroneBody FindNearestDroneExcluding(DroneBody exclude)
+    DroneBody FindNearestDrone()
     {
         DroneBody[] allDrones = FindObjectsOfType<DroneBody>();
         DroneBody nearest = null;
@@ -48,9 +35,6 @@ public class TurretController : MonoBehaviour
 
         foreach (DroneBody drone in allDrones)
         {
-            if (drone == exclude)
-                continue;
-
             float dist = Vector3.Distance(drone.transform.position, transform.position);
             if (dist > detectionRange)
                 continue;
@@ -63,19 +47,6 @@ public class TurretController : MonoBehaviour
         }
 
         return nearest;
-    }
-
-    Vector3 PredictPosition(DroneBody drone)
-    {
-        Rigidbody droneRb = drone.GetComponent<Rigidbody>();
-        if (droneRb == null)
-            return drone.transform.position;
-
-        Vector3 origin = muzzlePoint != null ? muzzlePoint.position : transform.position;
-        float dist = Vector3.Distance(origin, drone.transform.position);
-        float timeToImpact = dist / Mathf.Max(bulletSpeed, 1f);
-
-        return drone.transform.position + droneRb.velocity * timeToImpact;
     }
 
     void Fire(Vector3 aimPos)
