@@ -903,7 +903,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bulletPrefab: {fileID: 5363653975571772103, guid: f2eb82940bf60164da60e6d1e4f66540, type: 3}
-  bulletSpeed: 80
+  bulletSpeed: 60
   fireRate: 3
 --- !u!114 &509282642
 MonoBehaviour:
@@ -1797,7 +1797,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bulletPrefab: {fileID: 5363653975571772103, guid: f2eb82940bf60164da60e6d1e4f66540, type: 3}
-  bulletSpeed: 80
+  bulletSpeed: 60
   fireRate: 3
 --- !u!114 &1040311352
 MonoBehaviour:
@@ -3064,7 +3064,7 @@ MonoBehaviour:
     VectorActionDescriptions: []
     VectorActionSpaceType: 1
     hasUpgradedBrainParametersWithActionSpec: 1
-  m_Model: {fileID: 5022602860645237092, guid: 5a92ee9f075df4c99bfc1a8781368a2f, type: 3}
+  m_Model: {fileID: 5022602860645237092, guid: 9018b33930c8f49538984153a9bc25dd, type: 3}
   m_InferenceDevice: 0
   m_BehaviorType: 0
   m_BehaviorName: DroneAgent
@@ -3094,7 +3094,7 @@ MonoBehaviour:
   motorLagTimeConstant: 0.05
   linearDragCoeff: 0.5
   angularDragCoeff: 2
-  motorsActive: 01000101
+  motorsActive: 01010101
   targetVelocity: {x: 0, y: 0, z: 0}
   targetTransform: {fileID: 0}
   drawMotorForces: 1

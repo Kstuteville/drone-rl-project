@@ -59,19 +59,22 @@ public class Bullet : MonoBehaviour
     }
 
     void OnCollisionEnter(Collision collision)
+{
+    Rigidbody hitRb = collision.rigidbody;
+    if (hitRb != null)
     {
-        Rigidbody hitRb = collision.rigidbody;
-        if (hitRb != null)
-        {
-            // Apply impulse at the exact contact point so off-center hits cause realistic spin
-            Vector3 contactPoint = collision.contacts[0].point;
-            Vector3 impactDir = GetComponent<Rigidbody>().velocity.normalized;
-            float impactForce = GetComponent<Rigidbody>().mass * GetComponent<Rigidbody>().velocity.magnitude;
+        // Register hit on drone (handles motor disable logic on hit 3 and 4)
+        DroneBody drone = collision.gameObject.GetComponent<DroneBody>();
+        if (drone != null)
+            drone.RegisterHit();
 
-            hitRb.AddForceAtPosition(impactDir * impactForce, contactPoint, ForceMode.Impulse);
-            Debug.Log($"[Bullet] Hit: {collision.gameObject.name} at {contactPoint}");
-        }
-
-        Destroy(gameObject);
+        // Full impulse force unchanged
+        Vector3 contactPoint = collision.contacts[0].point;
+        Vector3 impactDir = GetComponent<Rigidbody>().velocity.normalized;
+        float impactForce = GetComponent<Rigidbody>().mass * GetComponent<Rigidbody>().velocity.magnitude;
+        hitRb.AddForceAtPosition(impactDir * impactForce, contactPoint, ForceMode.Impulse);
+        Debug.Log($"[Bullet] Hit: {collision.gameObject.name} at {contactPoint}");
     }
+    Destroy(gameObject);
 }
+    }

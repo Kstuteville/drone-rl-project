@@ -388,8 +388,36 @@ public class DroneBody : MonoBehaviour
         }
     }
 
+
+    private int _hitCount = 0;
+
+    public void RegisterHit()
+    {
+        _hitCount++;
+        if (_hitCount == 3)
+        {
+            // Disable random active motor
+            int motorToKill = Random.Range(0, 4);
+            DisableMotor(motorToKill);
+        }
+        else if (_hitCount == 4)
+        {
+            // Disable a different active motor
+            int[] active = System.Array.FindAll(
+                new int[]{0,1,2,3}, i => motorsActive[i]);
+            if (active.Length > 0)
+                DisableMotor(active[Random.Range(0, active.Length)]);
+        }
+    }
+
+public void ResetHits()
+{
+    _hitCount = 0;
+}
+
     public void ResetMotors()
     {
+        ResetHits(); // ← add this
         for (int i = 0; i < 4; i++)
         {
             motorsActive[i] = true;
@@ -422,12 +450,38 @@ public class DroneBody : MonoBehaviour
         }
     }
 
-    void OnGUI()
+   void OnGUI()
+{
+    if (!drawMotorForces) return;
+
+    // Offset to right side if PPO, left side if PID
+    bool isPPO = GetComponent<PPODroneController>() != null && GetComponent<PPODroneController>().enabled;
+    float xOffset = isPPO ? Screen.width * 0.5f + 10f : 10f;
+
+    GUI.Label(new Rect(xOffset, Screen.height - 60, 500, 25),
+        $"Target vel: {targetVelocity:F2} | Actual vel: {_rb?.velocity:F2}");
+    GUI.Label(new Rect(xOffset, Screen.height - 35, 500, 25),
+        $"Motors: [{_actualThrusts[0]:F2}, {_actualThrusts[1]:F2}, {_actualThrusts[2]:F2}, {_actualThrusts[3]:F2}]");
+
+    // Motor health display
+    GUIStyle style = new GUIStyle(GUI.skin.label);
+    style.fontSize = 16;
+    style.fontStyle = FontStyle.Bold;
+    for (int i = 0; i < 4; i++)
     {
-        if (!drawMotorForces) return;
-        GUI.Label(new Rect(10, Screen.height - 60, 500, 25),
-            $"Target vel: {targetVelocity:F2} | Actual vel: {_rb?.velocity:F2}");
-        GUI.Label(new Rect(10, Screen.height - 35, 500, 25),
-            $"Motors: [{_actualThrusts[0]:F2}, {_actualThrusts[1]:F2}, {_actualThrusts[2]:F2}, {_actualThrusts[3]:F2}]");
+        style.normal.textColor = motorsActive[i] ? Color.green : Color.red;
+        GUI.Label(new Rect(xOffset, Screen.height - 90 - (i * 20), 200, 20),
+            $"Motor {i}: {(motorsActive[i] ? "OK" : "DEAD")} | Hits: {_hitCount}");
     }
+
+    // Label which controller this is
+    GUIStyle headerStyle = new GUIStyle(GUI.skin.label);
+    headerStyle.fontSize = 18;
+    headerStyle.fontStyle = FontStyle.Bold;
+    headerStyle.normal.textColor = isPPO ? Color.cyan : Color.yellow;
+    GUI.Label(new Rect(xOffset, Screen.height - 115, 200, 25),
+        isPPO ? "PPO Controller" : "PID Controller");
+}
+    
+
 }
