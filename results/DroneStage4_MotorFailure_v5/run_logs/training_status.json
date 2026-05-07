@@ -1,0 +1,68 @@
+{
+    "drone_curriculum_stage": {
+        "lesson_num": 0
+    },
+    "DroneAgentV2": {
+        "checkpoints": [
+            {
+                "steps": 2999989,
+                "file_path": "results/DroneStage4_MotorFailure_v5/DroneAgentV2/DroneAgentV2-2999989.onnx",
+                "reward": 275.9611026269418,
+                "creation_time": 1777335090.5684469,
+                "auxillary_file_paths": [
+                    "results/DroneStage4_MotorFailure_v5/DroneAgentV2/DroneAgentV2-2999989.pt"
+                ]
+            },
+            {
+                "steps": 3499525,
+                "file_path": "results/DroneStage4_MotorFailure_v5/DroneAgentV2/DroneAgentV2-3499525.onnx",
+                "reward": 305.57351251209485,
+                "creation_time": 1777335350.875079,
+                "auxillary_file_paths": [
+                    "results/DroneStage4_MotorFailure_v5/DroneAgentV2/DroneAgentV2-3499525.pt"
+                ]
+            },
+            {
+                "steps": 3999824,
+                "file_path": "results/DroneStage4_MotorFailure_v5/DroneAgentV2/DroneAgentV2-3999824.onnx",
+                "reward": 432.1917610168457,
+                "creation_time": 1777335615.469163,
+                "auxillary_file_paths": [
+                    "results/DroneStage4_MotorFailure_v5/DroneAgentV2/DroneAgentV2-3999824.pt"
+                ]
+            },
+            {
+                "steps": 4499892,
+                "file_path": "results/DroneStage4_MotorFailure_v5/DroneAgentV2/DroneAgentV2-4499892.onnx",
+                "reward": 271.00017738342285,
+                "creation_time": 1777335872.266813,
+                "auxillary_file_paths": [
+                    "results/DroneStage4_MotorFailure_v5/DroneAgentV2/DroneAgentV2-4499892.pt"
+                ]
+            },
+            {
+                "steps": 4820755,
+                "file_path": "results/DroneStage4_MotorFailure_v5/DroneAgentV2/DroneAgentV2-4820755.onnx",
+                "reward": 349.00171531438826,
+                "creation_time": 1777336046.209884,
+                "auxillary_file_paths": [
+                    "results/DroneStage4_MotorFailure_v5/DroneAgentV2/DroneAgentV2-4820755.pt"
+                ]
+            }
+        ],
+        "final_checkpoint": {
+            "steps": 4820755,
+            "file_path": "results/DroneStage4_MotorFailure_v5/DroneAgentV2.onnx",
+            "reward": 349.00171531438826,
+            "creation_time": 1777336046.209884,
+            "auxillary_file_paths": [
+                "results/DroneStage4_MotorFailure_v5/DroneAgentV2/DroneAgentV2-4820755.pt"
+            ]
+        }
+    },
+    "metadata": {
+        "stats_format_version": "0.3.0",
+        "mlagents_version": "0.30.0",
+        "torch_version": "1.11.0"
+    }
+}

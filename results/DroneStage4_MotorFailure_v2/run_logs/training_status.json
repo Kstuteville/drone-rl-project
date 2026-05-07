@@ -1,0 +1,32 @@
+{
+    "drone_curriculum_stage": {
+        "lesson_num": 0
+    },
+    "DroneAgentV2": {
+        "checkpoints": [
+            {
+                "steps": 94208,
+                "file_path": "results/DroneStage4_MotorFailure_v2/DroneAgentV2/DroneAgentV2-94208.onnx",
+                "reward": null,
+                "creation_time": 1777319577.979755,
+                "auxillary_file_paths": [
+                    "results/DroneStage4_MotorFailure_v2/DroneAgentV2/DroneAgentV2-94208.pt"
+                ]
+            }
+        ],
+        "final_checkpoint": {
+            "steps": 94208,
+            "file_path": "results/DroneStage4_MotorFailure_v2/DroneAgentV2.onnx",
+            "reward": null,
+            "creation_time": 1777319577.979755,
+            "auxillary_file_paths": [
+                "results/DroneStage4_MotorFailure_v2/DroneAgentV2/DroneAgentV2-94208.pt"
+            ]
+        }
+    },
+    "metadata": {
+        "stats_format_version": "0.3.0",
+        "mlagents_version": "0.30.0",
+        "torch_version": "1.11.0"
+    }
+}

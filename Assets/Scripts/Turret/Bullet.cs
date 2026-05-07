@@ -7,8 +7,12 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody))]
 public class Bullet : MonoBehaviour
 {
-    [Tooltip("Bullet mass in kg. Higher = more force transferred to the drone on impact.")]
-    public float mass = 0.1f;
+    [Tooltip("Bullet mass in kg.")]
+    public float mass = 0.01f;
+
+    [Tooltip("Multiplier on the physics impulse applied to the drone. Keep low so hits register without destabilizing.")]
+    [Range(0f, 1f)]
+    public float impactForceScale = 0.05f;
 
     [Tooltip("Seconds before auto-destroying if no collision")]
     public float lifetime = 5f;
@@ -63,15 +67,21 @@ public class Bullet : MonoBehaviour
     Rigidbody hitRb = collision.rigidbody;
     if (hitRb != null)
     {
-        // Register hit on drone (handles motor disable logic on hit 3 and 4)
-        DroneBody drone = collision.gameObject.GetComponent<DroneBody>();
-        if (drone != null)
-            drone.RegisterHit();
+        // Check V2 first, then fall back to original. Use GetComponentInParent in case bullet hits a child collider.
+        DroneBodyV2 droneV2 = collision.gameObject.GetComponentInParent<DroneBodyV2>();
+        if (droneV2 != null)
+            droneV2.RegisterHit();
+        else
+        {
+            DroneBody drone = collision.gameObject.GetComponentInParent<DroneBody>();
+            if (drone != null && drone.enabled)
+                drone.RegisterHit();
+        }
 
-        // Full impulse force unchanged
         Vector3 contactPoint = collision.contacts[0].point;
-        Vector3 impactDir = GetComponent<Rigidbody>().velocity.normalized;
-        float impactForce = GetComponent<Rigidbody>().mass * GetComponent<Rigidbody>().velocity.magnitude;
+        Rigidbody bulletRb = GetComponent<Rigidbody>();
+        Vector3 impactDir = bulletRb.velocity.normalized;
+        float impactForce = bulletRb.mass * bulletRb.velocity.magnitude * impactForceScale;
         hitRb.AddForceAtPosition(impactDir * impactForce, contactPoint, ForceMode.Impulse);
         Debug.Log($"[Bullet] Hit: {collision.gameObject.name} at {contactPoint}");
     }

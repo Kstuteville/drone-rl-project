@@ -2927,7 +2927,6 @@ GameObject:
   - component: {fileID: 1450438054}
   - component: {fileID: 1450438053}
   - component: {fileID: 1450438052}
-  - component: {fileID: 1450438051}
   - component: {fileID: 1450438050}
   - component: {fileID: 1450438049}
   - component: {fileID: 1450438048}
@@ -2935,6 +2934,8 @@ GameObject:
   - component: {fileID: 1450438046}
   - component: {fileID: 1450438045}
   - component: {fileID: 1450438044}
+  - component: {fileID: 1450438057}
+  - component: {fileID: 1450438058}
   m_Layer: 0
   m_Name: PPO_Drone
   m_TagString: Untagged
@@ -2999,7 +3000,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bbf3260683c404f099ca5c8720ea5613, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  droneBody: {fileID: 1450438051}
+  droneBody: {fileID: 0}
 --- !u!114 &1450438048
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3012,7 +3013,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6d27564e2592b463bb21daac2875acb4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  drone: {fileID: 1450438051}
+  drone: {fileID: 0}
   mode: 0
   squareSpeed: 3
   legDuration: 3
@@ -3027,7 +3028,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1450438042}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d9702136082984bda9ea639c1faa20c3, type: 3}
   m_Name: 
@@ -3064,54 +3065,14 @@ MonoBehaviour:
     VectorActionDescriptions: []
     VectorActionSpaceType: 1
     hasUpgradedBrainParametersWithActionSpec: 1
-  m_Model: {fileID: 5022602860645237092, guid: 9018b33930c8f49538984153a9bc25dd, type: 3}
+  m_Model: {fileID: 5022602860645237092, guid: 616c9e99d03034d44be6a573403ba5da, type: 3}
   m_InferenceDevice: 0
-  m_BehaviorType: 0
-  m_BehaviorName: DroneAgent
+  m_BehaviorType: 2
+  m_BehaviorName: DroneAgentV2
   TeamId: 0
   m_UseChildSensors: 1
   m_UseChildActuators: 1
   m_ObservableAttributeHandling: 0
---- !u!114 &1450438051
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1450438042}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9909748d51a5f45708d8873ba189c32b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxThrustPerMotor: 7.5
-  motorPositions:
-  - {x: -0.88, y: 0.6, z: 0.88}
-  - {x: 0.88, y: 0.6, z: 0.88}
-  - {x: -0.88, y: 0.6, z: -0.88}
-  - {x: 0.88, y: 0.6, z: -0.88}
-  maxThrustDeltaRate: 2
-  motorLagTimeConstant: 0.05
-  linearDragCoeff: 0.5
-  angularDragCoeff: 2
-  motorsActive: 01010101
-  targetVelocity: {x: 0, y: 0, z: 0}
-  targetTransform: {fileID: 0}
-  drawMotorForces: 1
-  randomizeSpawnOnEpisodeBegin: 1
-  maxSpawnTilt: 10
-  spawnConfig:
-    positionJitter: {x: 0, y: 0, z: 0}
-    yBase: 5
-    yJitter: 0
-    yMin: 1.5
-    maxTiltDegrees: 10
-    randomizeYaw: 1
-    maxYawDegrees: 180
-    linearVelocityRange: {x: 0.5, y: 0.3, z: 0.5}
-    angularVelocityRange: {x: 0, y: 0, z: 0}
-    useFixedSeed: 0
-    seedValue: 0
 --- !u!54 &1450438052
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -3230,6 +3191,76 @@ Transform:
   - {fileID: 816115379}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1450438057
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1450438042}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f8f05f5434f794ad69232e127e144751, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  agentParameters:
+    maxStep: 0
+  hasUpgradedFromAgentParameters: 1
+  MaxStep: 0
+  altitudeWeight: 0.22
+  velocityWeight: 0.15
+  positionGuidanceWeight: 0.28
+  stabilityWeight: 0.22
+  driftWeight: 0.05
+  verticalPenaltyWeight: 0.05
+--- !u!114 &1450438058
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1450438042}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e12bbed67352248f29890123c0c349ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxThrustPerMotor: 7.5
+  motorPositions:
+  - {x: -0.88, y: 0.6, z: 0.88}
+  - {x: 0.88, y: 0.6, z: 0.88}
+  - {x: -0.88, y: 0.6, z: -0.88}
+  - {x: 0.88, y: 0.6, z: -0.88}
+  maxThrustDeltaRate: 2
+  motorLagTimeConstant: 0.05
+  linearDragCoeff: 0.5
+  angularDragCoeff: 2
+  motorsActive: 01010101
+  enableScriptedCompensation: 1
+  compensationThrustMultiplier: 1.81
+  motorDeathVFXPrefab: {fileID: 0}
+  targetVelocity: {x: 0, y: 0, z: 0}
+  targetTransform: {fileID: 0}
+  cutThrustOnDoubleMotorLoss: 1
+  enablePositionLeash: 0
+  leashSpringK: 3
+  leashDampK: 1.5
+  leashDeadzone: 1.5
+  drawMotorForces: 1
+  randomizeSpawnOnEpisodeBegin: 0
+  maxSpawnTilt: 10
+  spawnConfig:
+    positionJitter: {x: 0, y: 0, z: 0}
+    yBase: 5
+    yJitter: 0
+    yMin: 1.5
+    maxTiltDegrees: 10
+    randomizeYaw: 1
+    maxYawDegrees: 180
+    linearVelocityRange: {x: 0.5, y: 0.3, z: 0.5}
+    angularVelocityRange: {x: 0, y: 0, z: 0}
+    useFixedSeed: 0
+    seedValue: 0
 --- !u!1 &1587492103
 GameObject:
   m_ObjectHideFlags: 0
@@ -5474,7 +5505,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7827646426877532044}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9909748d51a5f45708d8873ba189c32b, type: 3}
   m_Name: 
@@ -6392,6 +6423,7 @@ GameObject:
   - component: {fileID: 4588926519469726155}
   - component: {fileID: 4306190719282973282}
   - component: {fileID: 8678120232368924914}
+  - component: {fileID: 8678120232368924915}
   m_Layer: 0
   m_Name: PID_Drone
   m_TagString: Untagged
@@ -6720,6 +6752,56 @@ MonoBehaviour:
     kP: 0.7
     kI: 0.1
     kD: 0.4
+  wobbleIntensity: 0.03
+  horizDampGain: 0.4
+--- !u!114 &8678120232368924915
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7827646426877532044}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e12bbed67352248f29890123c0c349ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxThrustPerMotor: 7.5
+  motorPositions:
+  - {x: -0.88, y: 0.6, z: 0.88}
+  - {x: 0.88, y: 0.6, z: 0.88}
+  - {x: -0.88, y: 0.6, z: -0.88}
+  - {x: 0.88, y: 0.6, z: -0.88}
+  maxThrustDeltaRate: 2
+  motorLagTimeConstant: 0.05
+  linearDragCoeff: 0.5
+  angularDragCoeff: 2
+  motorsActive: 01010101
+  enableScriptedCompensation: 1
+  compensationThrustMultiplier: 1.467
+  motorDeathVFXPrefab: {fileID: 0}
+  targetVelocity: {x: 0, y: 0, z: 0}
+  targetTransform: {fileID: 0}
+  cutThrustOnDoubleMotorLoss: 1
+  enablePositionLeash: 1
+  leashSpringK: 3
+  leashDampK: 1.5
+  leashDeadzone: 1.5
+  drawMotorForces: 1
+  randomizeSpawnOnEpisodeBegin: 0
+  maxSpawnTilt: 10
+  spawnConfig:
+    positionJitter: {x: 0, y: 0, z: 0}
+    yBase: 5
+    yJitter: 0
+    yMin: 1.5
+    maxTiltDegrees: 10
+    randomizeYaw: 1
+    maxYawDegrees: 180
+    linearVelocityRange: {x: 0.5, y: 0.3, z: 0.5}
+    angularVelocityRange: {x: 0, y: 0, z: 0}
+    useFixedSeed: 0
+    seedValue: 0
 --- !u!114 &8710200003152695315
 MonoBehaviour:
   m_ObjectHideFlags: 0

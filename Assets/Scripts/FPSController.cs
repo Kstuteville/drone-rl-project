@@ -62,6 +62,6 @@ public class FPSController : MonoBehaviour
         move = move.normalized * speed;
         move.y = -9.81f;
 
-        _cc.Move(move * Time.deltaTime);
+        if (_cc.enabled) _cc.Move(move * Time.deltaTime);
     }
 }

@@ -2477,6 +2477,12 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 224135102267859126, guid: aceef1537002b5c4a8bf9f1d433d9361, type: 3}
       insertIndex: -1
       addedObject: {fileID: 910001002}
+    - targetCorrespondingSourceObject: {fileID: 224135102267859126, guid: aceef1537002b5c4a8bf9f1d433d9361, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2072143717}
+    - targetCorrespondingSourceObject: {fileID: 224135102267859126, guid: aceef1537002b5c4a8bf9f1d433d9361, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2072143716}
     - targetCorrespondingSourceObject: {fileID: 5072483314761083324, guid: aceef1537002b5c4a8bf9f1d433d9361, type: 3}
       insertIndex: -1
       addedObject: {fileID: 847737319}
@@ -2614,7 +2620,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 847737317}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d9702136082984bda9ea639c1faa20c3, type: 3}
   m_Name: 
@@ -2651,10 +2657,10 @@ MonoBehaviour:
     VectorActionDescriptions: []
     VectorActionSpaceType: 1
     hasUpgradedBrainParametersWithActionSpec: 1
-  m_Model: {fileID: 0}
+  m_Model: {fileID: 5022602860645237092, guid: 4c42813869a36ba49a80efa0f5abf823, type: 3}
   m_InferenceDevice: 0
-  m_BehaviorType: 1
-  m_BehaviorName: DroneAgent
+  m_BehaviorType: 0
+  m_BehaviorName: DroneAgentV2
   TeamId: 0
   m_UseChildSensors: 1
   m_UseChildActuators: 1
@@ -2666,7 +2672,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 847737317}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9909748d51a5f45708d8873ba189c32b, type: 3}
   m_Name: 
@@ -2685,7 +2691,7 @@ MonoBehaviour:
   targetVelocity: {x: 0, y: 0, z: 0}
   targetTransform: {fileID: 0}
   drawMotorForces: 1
-  randomizeSpawnOnEpisodeBegin: 1
+  randomizeSpawnOnEpisodeBegin: 0
   maxSpawnTilt: 1
   spawnConfig:
     positionJitter: {x: 0, y: 0, z: 0}
@@ -3357,6 +3363,12 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 224135102267859126, guid: aceef1537002b5c4a8bf9f1d433d9361, type: 3}
       insertIndex: -1
       addedObject: {fileID: 910001004}
+    - targetCorrespondingSourceObject: {fileID: 224135102267859126, guid: aceef1537002b5c4a8bf9f1d433d9361, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 985626789}
+    - targetCorrespondingSourceObject: {fileID: 224135102267859126, guid: aceef1537002b5c4a8bf9f1d433d9361, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 985626788}
     - targetCorrespondingSourceObject: {fileID: 5072483314761083324, guid: aceef1537002b5c4a8bf9f1d433d9361, type: 3}
       insertIndex: -1
       addedObject: {fileID: 985626780}
@@ -3494,7 +3506,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 985626778}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d9702136082984bda9ea639c1faa20c3, type: 3}
   m_Name: 
@@ -3531,10 +3543,10 @@ MonoBehaviour:
     VectorActionDescriptions: []
     VectorActionSpaceType: 1
     hasUpgradedBrainParametersWithActionSpec: 1
-  m_Model: {fileID: 0}
+  m_Model: {fileID: 5022602860645237092, guid: 4c42813869a36ba49a80efa0f5abf823, type: 3}
   m_InferenceDevice: 0
-  m_BehaviorType: 1
-  m_BehaviorName: DroneAgent
+  m_BehaviorType: 0
+  m_BehaviorName: DroneAgentV2
   TeamId: 0
   m_UseChildSensors: 1
   m_UseChildActuators: 1
@@ -3546,7 +3558,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 985626778}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9909748d51a5f45708d8873ba189c32b, type: 3}
   m_Name: 
@@ -3565,8 +3577,70 @@ MonoBehaviour:
   targetVelocity: {x: 0, y: 0, z: 0}
   targetTransform: {fileID: 0}
   drawMotorForces: 1
-  randomizeSpawnOnEpisodeBegin: 1
+  randomizeSpawnOnEpisodeBegin: 0
   maxSpawnTilt: 1
+  spawnConfig:
+    positionJitter: {x: 0, y: 0, z: 0}
+    yBase: 5
+    yJitter: 0
+    yMin: 1.5
+    maxTiltDegrees: 10
+    randomizeYaw: 1
+    maxYawDegrees: 180
+    linearVelocityRange: {x: 0.5, y: 0.3, z: 0.5}
+    angularVelocityRange: {x: 0, y: 0, z: 0}
+    useFixedSeed: 0
+    seedValue: 0
+--- !u!114 &985626788
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 985626778}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f8f05f5434f794ad69232e127e144751, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  agentParameters:
+    maxStep: 0
+  hasUpgradedFromAgentParameters: 1
+  MaxStep: 3000
+  altitudeWeight: 0.22
+  velocityWeight: 0.15
+  positionGuidanceWeight: 0.28
+  stabilityWeight: 0.22
+  driftWeight: 0.05
+  verticalPenaltyWeight: 0.05
+--- !u!114 &985626789
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 985626778}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e12bbed67352248f29890123c0c349ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxThrustPerMotor: 7.5
+  motorPositions:
+  - {x: -0.88, y: 0.6, z: 0.88}
+  - {x: 0.88, y: 0.6, z: 0.88}
+  - {x: -0.88, y: 0.6, z: -0.88}
+  - {x: 0.88, y: 0.6, z: -0.88}
+  maxThrustDeltaRate: 2
+  motorLagTimeConstant: 0.05
+  linearDragCoeff: 0.5
+  angularDragCoeff: 2
+  motorsActive: 01010101
+  targetVelocity: {x: 0, y: 0, z: 0}
+  targetTransform: {fileID: 0}
+  drawMotorForces: 1
+  randomizeSpawnOnEpisodeBegin: 1
+  maxSpawnTilt: 10
   spawnConfig:
     positionJitter: {x: 0, y: 0, z: 0}
     yBase: 5
@@ -3926,6 +4000,12 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 224135102267859126, guid: aceef1537002b5c4a8bf9f1d433d9361, type: 3}
       insertIndex: -1
       addedObject: {fileID: 910001006}
+    - targetCorrespondingSourceObject: {fileID: 224135102267859126, guid: aceef1537002b5c4a8bf9f1d433d9361, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1113929415}
+    - targetCorrespondingSourceObject: {fileID: 224135102267859126, guid: aceef1537002b5c4a8bf9f1d433d9361, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1113929414}
     - targetCorrespondingSourceObject: {fileID: 5072483314761083324, guid: aceef1537002b5c4a8bf9f1d433d9361, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1113929406}
@@ -4063,7 +4143,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1113929404}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d9702136082984bda9ea639c1faa20c3, type: 3}
   m_Name: 
@@ -4100,10 +4180,10 @@ MonoBehaviour:
     VectorActionDescriptions: []
     VectorActionSpaceType: 1
     hasUpgradedBrainParametersWithActionSpec: 1
-  m_Model: {fileID: 0}
+  m_Model: {fileID: 5022602860645237092, guid: 4c42813869a36ba49a80efa0f5abf823, type: 3}
   m_InferenceDevice: 0
-  m_BehaviorType: 1
-  m_BehaviorName: DroneAgent
+  m_BehaviorType: 0
+  m_BehaviorName: DroneAgentV2
   TeamId: 0
   m_UseChildSensors: 1
   m_UseChildActuators: 1
@@ -4115,7 +4195,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1113929404}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9909748d51a5f45708d8873ba189c32b, type: 3}
   m_Name: 
@@ -4134,8 +4214,70 @@ MonoBehaviour:
   targetVelocity: {x: 0, y: 0, z: 0}
   targetTransform: {fileID: 0}
   drawMotorForces: 1
-  randomizeSpawnOnEpisodeBegin: 1
+  randomizeSpawnOnEpisodeBegin: 0
   maxSpawnTilt: 1
+  spawnConfig:
+    positionJitter: {x: 0, y: 0, z: 0}
+    yBase: 5
+    yJitter: 0
+    yMin: 1.5
+    maxTiltDegrees: 10
+    randomizeYaw: 1
+    maxYawDegrees: 180
+    linearVelocityRange: {x: 0.5, y: 0.3, z: 0.5}
+    angularVelocityRange: {x: 0, y: 0, z: 0}
+    useFixedSeed: 0
+    seedValue: 0
+--- !u!114 &1113929414
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1113929404}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f8f05f5434f794ad69232e127e144751, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  agentParameters:
+    maxStep: 0
+  hasUpgradedFromAgentParameters: 1
+  MaxStep: 3000
+  altitudeWeight: 0.22
+  velocityWeight: 0.15
+  positionGuidanceWeight: 0.28
+  stabilityWeight: 0.22
+  driftWeight: 0.05
+  verticalPenaltyWeight: 0.05
+--- !u!114 &1113929415
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1113929404}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e12bbed67352248f29890123c0c349ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxThrustPerMotor: 7.5
+  motorPositions:
+  - {x: -0.88, y: 0.6, z: 0.88}
+  - {x: 0.88, y: 0.6, z: 0.88}
+  - {x: -0.88, y: 0.6, z: -0.88}
+  - {x: 0.88, y: 0.6, z: -0.88}
+  maxThrustDeltaRate: 2
+  motorLagTimeConstant: 0.05
+  linearDragCoeff: 0.5
+  angularDragCoeff: 2
+  motorsActive: 01010101
+  targetVelocity: {x: 0, y: 0, z: 0}
+  targetTransform: {fileID: 0}
+  drawMotorForces: 1
+  randomizeSpawnOnEpisodeBegin: 1
+  maxSpawnTilt: 10
   spawnConfig:
     positionJitter: {x: 0, y: 0, z: 0}
     yBase: 5
@@ -4250,13 +4392,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1133738790}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.09000015, y: 3.8899994, z: -6.45}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalRotation: {x: 0.42593107, y: 0.48394808, z: -0.4153275, w: 0.6417789}
+  m_LocalPosition: {x: -2.7, y: 18.4, z: -1.6}
+  m_LocalScale: {x: 1, y: 3.8773, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 108.43201, y: -122.257996, z: -202.47}
 --- !u!114 &1133738795
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4492,6 +4634,12 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 224135102267859126, guid: aceef1537002b5c4a8bf9f1d433d9361, type: 3}
       insertIndex: -1
       addedObject: {fileID: 910001008}
+    - targetCorrespondingSourceObject: {fileID: 224135102267859126, guid: aceef1537002b5c4a8bf9f1d433d9361, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1195700747}
+    - targetCorrespondingSourceObject: {fileID: 224135102267859126, guid: aceef1537002b5c4a8bf9f1d433d9361, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1195700746}
     - targetCorrespondingSourceObject: {fileID: 5072483314761083324, guid: aceef1537002b5c4a8bf9f1d433d9361, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1195700738}
@@ -4629,7 +4777,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1195700736}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d9702136082984bda9ea639c1faa20c3, type: 3}
   m_Name: 
@@ -4666,10 +4814,10 @@ MonoBehaviour:
     VectorActionDescriptions: []
     VectorActionSpaceType: 1
     hasUpgradedBrainParametersWithActionSpec: 1
-  m_Model: {fileID: 0}
+  m_Model: {fileID: 5022602860645237092, guid: 4c42813869a36ba49a80efa0f5abf823, type: 3}
   m_InferenceDevice: 0
-  m_BehaviorType: 1
-  m_BehaviorName: DroneAgent
+  m_BehaviorType: 0
+  m_BehaviorName: DroneAgentV2
   TeamId: 0
   m_UseChildSensors: 1
   m_UseChildActuators: 1
@@ -4681,7 +4829,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1195700736}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9909748d51a5f45708d8873ba189c32b, type: 3}
   m_Name: 
@@ -4700,8 +4848,70 @@ MonoBehaviour:
   targetVelocity: {x: 0, y: 0, z: 0}
   targetTransform: {fileID: 0}
   drawMotorForces: 1
-  randomizeSpawnOnEpisodeBegin: 1
+  randomizeSpawnOnEpisodeBegin: 0
   maxSpawnTilt: 1
+  spawnConfig:
+    positionJitter: {x: 0, y: 0, z: 0}
+    yBase: 5
+    yJitter: 0
+    yMin: 1.5
+    maxTiltDegrees: 10
+    randomizeYaw: 1
+    maxYawDegrees: 180
+    linearVelocityRange: {x: 0.5, y: 0.3, z: 0.5}
+    angularVelocityRange: {x: 0, y: 0, z: 0}
+    useFixedSeed: 0
+    seedValue: 0
+--- !u!114 &1195700746
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1195700736}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f8f05f5434f794ad69232e127e144751, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  agentParameters:
+    maxStep: 0
+  hasUpgradedFromAgentParameters: 1
+  MaxStep: 3000
+  altitudeWeight: 0.22
+  velocityWeight: 0.15
+  positionGuidanceWeight: 0.28
+  stabilityWeight: 0.22
+  driftWeight: 0.05
+  verticalPenaltyWeight: 0.05
+--- !u!114 &1195700747
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1195700736}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e12bbed67352248f29890123c0c349ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxThrustPerMotor: 7.5
+  motorPositions:
+  - {x: -0.88, y: 0.6, z: 0.88}
+  - {x: 0.88, y: 0.6, z: 0.88}
+  - {x: -0.88, y: 0.6, z: -0.88}
+  - {x: 0.88, y: 0.6, z: -0.88}
+  maxThrustDeltaRate: 2
+  motorLagTimeConstant: 0.05
+  linearDragCoeff: 0.5
+  angularDragCoeff: 2
+  motorsActive: 01010101
+  targetVelocity: {x: 0, y: 0, z: 0}
+  targetTransform: {fileID: 0}
+  drawMotorForces: 1
+  randomizeSpawnOnEpisodeBegin: 1
+  maxSpawnTilt: 10
   spawnConfig:
     positionJitter: {x: 0, y: 0, z: 0}
     yBase: 5
@@ -5166,6 +5376,12 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 224135102267859126, guid: aceef1537002b5c4a8bf9f1d433d9361, type: 3}
       insertIndex: -1
       addedObject: {fileID: 910001010}
+    - targetCorrespondingSourceObject: {fileID: 224135102267859126, guid: aceef1537002b5c4a8bf9f1d433d9361, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1330179880}
+    - targetCorrespondingSourceObject: {fileID: 224135102267859126, guid: aceef1537002b5c4a8bf9f1d433d9361, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1330179879}
     - targetCorrespondingSourceObject: {fileID: 5072483314761083324, guid: aceef1537002b5c4a8bf9f1d433d9361, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1330179871}
@@ -5303,7 +5519,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1330179869}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d9702136082984bda9ea639c1faa20c3, type: 3}
   m_Name: 
@@ -5340,10 +5556,10 @@ MonoBehaviour:
     VectorActionDescriptions: []
     VectorActionSpaceType: 1
     hasUpgradedBrainParametersWithActionSpec: 1
-  m_Model: {fileID: 0}
+  m_Model: {fileID: 5022602860645237092, guid: 4c42813869a36ba49a80efa0f5abf823, type: 3}
   m_InferenceDevice: 0
-  m_BehaviorType: 1
-  m_BehaviorName: DroneAgent
+  m_BehaviorType: 0
+  m_BehaviorName: DroneAgentV2
   TeamId: 0
   m_UseChildSensors: 1
   m_UseChildActuators: 1
@@ -5355,7 +5571,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1330179869}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9909748d51a5f45708d8873ba189c32b, type: 3}
   m_Name: 
@@ -5374,8 +5590,70 @@ MonoBehaviour:
   targetVelocity: {x: 0, y: 0, z: 0}
   targetTransform: {fileID: 0}
   drawMotorForces: 1
-  randomizeSpawnOnEpisodeBegin: 1
+  randomizeSpawnOnEpisodeBegin: 0
   maxSpawnTilt: 1
+  spawnConfig:
+    positionJitter: {x: 0, y: 0, z: 0}
+    yBase: 5
+    yJitter: 0
+    yMin: 1.5
+    maxTiltDegrees: 10
+    randomizeYaw: 1
+    maxYawDegrees: 180
+    linearVelocityRange: {x: 0.5, y: 0.3, z: 0.5}
+    angularVelocityRange: {x: 0, y: 0, z: 0}
+    useFixedSeed: 0
+    seedValue: 0
+--- !u!114 &1330179879
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1330179869}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f8f05f5434f794ad69232e127e144751, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  agentParameters:
+    maxStep: 0
+  hasUpgradedFromAgentParameters: 1
+  MaxStep: 3000
+  altitudeWeight: 0.22
+  velocityWeight: 0.15
+  positionGuidanceWeight: 0.28
+  stabilityWeight: 0.22
+  driftWeight: 0.05
+  verticalPenaltyWeight: 0.05
+--- !u!114 &1330179880
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1330179869}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e12bbed67352248f29890123c0c349ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxThrustPerMotor: 7.5
+  motorPositions:
+  - {x: -0.88, y: 0.6, z: 0.88}
+  - {x: 0.88, y: 0.6, z: 0.88}
+  - {x: -0.88, y: 0.6, z: -0.88}
+  - {x: 0.88, y: 0.6, z: -0.88}
+  maxThrustDeltaRate: 2
+  motorLagTimeConstant: 0.05
+  linearDragCoeff: 0.5
+  angularDragCoeff: 2
+  motorsActive: 01010101
+  targetVelocity: {x: 0, y: 0, z: 0}
+  targetTransform: {fileID: 0}
+  drawMotorForces: 1
+  randomizeSpawnOnEpisodeBegin: 1
+  maxSpawnTilt: 10
   spawnConfig:
     positionJitter: {x: 0, y: 0, z: 0}
     yBase: 5
@@ -5487,6 +5765,12 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 224135102267859126, guid: aceef1537002b5c4a8bf9f1d433d9361, type: 3}
       insertIndex: -1
       addedObject: {fileID: 910001012}
+    - targetCorrespondingSourceObject: {fileID: 224135102267859126, guid: aceef1537002b5c4a8bf9f1d433d9361, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1359237525}
+    - targetCorrespondingSourceObject: {fileID: 224135102267859126, guid: aceef1537002b5c4a8bf9f1d433d9361, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1359237524}
     - targetCorrespondingSourceObject: {fileID: 5072483314761083324, guid: aceef1537002b5c4a8bf9f1d433d9361, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1359237516}
@@ -5624,7 +5908,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1359237514}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d9702136082984bda9ea639c1faa20c3, type: 3}
   m_Name: 
@@ -5661,10 +5945,10 @@ MonoBehaviour:
     VectorActionDescriptions: []
     VectorActionSpaceType: 1
     hasUpgradedBrainParametersWithActionSpec: 1
-  m_Model: {fileID: 5022602860645237092, guid: 9018b33930c8f49538984153a9bc25dd, type: 3}
+  m_Model: {fileID: 5022602860645237092, guid: 4c42813869a36ba49a80efa0f5abf823, type: 3}
   m_InferenceDevice: 0
-  m_BehaviorType: 1
-  m_BehaviorName: DroneAgent
+  m_BehaviorType: 0
+  m_BehaviorName: DroneAgentV2
   TeamId: 0
   m_UseChildSensors: 1
   m_UseChildActuators: 1
@@ -5676,7 +5960,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1359237514}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9909748d51a5f45708d8873ba189c32b, type: 3}
   m_Name: 
@@ -5695,8 +5979,70 @@ MonoBehaviour:
   targetVelocity: {x: 0, y: 0, z: 0}
   targetTransform: {fileID: 0}
   drawMotorForces: 1
-  randomizeSpawnOnEpisodeBegin: 1
+  randomizeSpawnOnEpisodeBegin: 0
   maxSpawnTilt: 1
+  spawnConfig:
+    positionJitter: {x: 0, y: 0, z: 0}
+    yBase: 5
+    yJitter: 0
+    yMin: 1.5
+    maxTiltDegrees: 10
+    randomizeYaw: 1
+    maxYawDegrees: 180
+    linearVelocityRange: {x: 0.5, y: 0.3, z: 0.5}
+    angularVelocityRange: {x: 0, y: 0, z: 0}
+    useFixedSeed: 0
+    seedValue: 0
+--- !u!114 &1359237524
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1359237514}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f8f05f5434f794ad69232e127e144751, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  agentParameters:
+    maxStep: 0
+  hasUpgradedFromAgentParameters: 1
+  MaxStep: 3000
+  altitudeWeight: 0.22
+  velocityWeight: 0.15
+  positionGuidanceWeight: 0.28
+  stabilityWeight: 0.22
+  driftWeight: 0.05
+  verticalPenaltyWeight: 0.05
+--- !u!114 &1359237525
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1359237514}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e12bbed67352248f29890123c0c349ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxThrustPerMotor: 7.5
+  motorPositions:
+  - {x: -0.88, y: 0.6, z: 0.88}
+  - {x: 0.88, y: 0.6, z: 0.88}
+  - {x: -0.88, y: 0.6, z: -0.88}
+  - {x: 0.88, y: 0.6, z: -0.88}
+  maxThrustDeltaRate: 2
+  motorLagTimeConstant: 0.05
+  linearDragCoeff: 0.5
+  angularDragCoeff: 2
+  motorsActive: 01010101
+  targetVelocity: {x: 0, y: 0, z: 0}
+  targetTransform: {fileID: 0}
+  drawMotorForces: 1
+  randomizeSpawnOnEpisodeBegin: 1
+  maxSpawnTilt: 10
   spawnConfig:
     positionJitter: {x: 0, y: 0, z: 0}
     yBase: 5
@@ -6019,6 +6365,12 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 224135102267859126, guid: aceef1537002b5c4a8bf9f1d433d9361, type: 3}
       insertIndex: -1
       addedObject: {fileID: 910001014}
+    - targetCorrespondingSourceObject: {fileID: 224135102267859126, guid: aceef1537002b5c4a8bf9f1d433d9361, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1443128935}
+    - targetCorrespondingSourceObject: {fileID: 224135102267859126, guid: aceef1537002b5c4a8bf9f1d433d9361, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1443128934}
     - targetCorrespondingSourceObject: {fileID: 5072483314761083324, guid: aceef1537002b5c4a8bf9f1d433d9361, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1443128926}
@@ -6156,7 +6508,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1443128924}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d9702136082984bda9ea639c1faa20c3, type: 3}
   m_Name: 
@@ -6193,10 +6545,10 @@ MonoBehaviour:
     VectorActionDescriptions: []
     VectorActionSpaceType: 1
     hasUpgradedBrainParametersWithActionSpec: 1
-  m_Model: {fileID: 0}
+  m_Model: {fileID: 5022602860645237092, guid: 4c42813869a36ba49a80efa0f5abf823, type: 3}
   m_InferenceDevice: 0
-  m_BehaviorType: 1
-  m_BehaviorName: DroneAgent
+  m_BehaviorType: 0
+  m_BehaviorName: DroneAgentV2
   TeamId: 0
   m_UseChildSensors: 1
   m_UseChildActuators: 1
@@ -6208,7 +6560,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1443128924}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9909748d51a5f45708d8873ba189c32b, type: 3}
   m_Name: 
@@ -6229,6 +6581,68 @@ MonoBehaviour:
   drawMotorForces: 1
   randomizeSpawnOnEpisodeBegin: 1
   maxSpawnTilt: 1
+  spawnConfig:
+    positionJitter: {x: 0, y: 0, z: 0}
+    yBase: 5
+    yJitter: 0
+    yMin: 1.5
+    maxTiltDegrees: 10
+    randomizeYaw: 1
+    maxYawDegrees: 180
+    linearVelocityRange: {x: 0.5, y: 0.3, z: 0.5}
+    angularVelocityRange: {x: 0, y: 0, z: 0}
+    useFixedSeed: 0
+    seedValue: 0
+--- !u!114 &1443128934
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1443128924}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f8f05f5434f794ad69232e127e144751, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  agentParameters:
+    maxStep: 0
+  hasUpgradedFromAgentParameters: 1
+  MaxStep: 3000
+  altitudeWeight: 0.22
+  velocityWeight: 0.15
+  positionGuidanceWeight: 0.28
+  stabilityWeight: 0.22
+  driftWeight: 0.05
+  verticalPenaltyWeight: 0.05
+--- !u!114 &1443128935
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1443128924}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e12bbed67352248f29890123c0c349ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxThrustPerMotor: 7.5
+  motorPositions:
+  - {x: -0.88, y: 0.6, z: 0.88}
+  - {x: 0.88, y: 0.6, z: 0.88}
+  - {x: -0.88, y: 0.6, z: -0.88}
+  - {x: 0.88, y: 0.6, z: -0.88}
+  maxThrustDeltaRate: 2
+  motorLagTimeConstant: 0.05
+  linearDragCoeff: 0.5
+  angularDragCoeff: 2
+  motorsActive: 01010101
+  targetVelocity: {x: 0, y: 0, z: 0}
+  targetTransform: {fileID: 0}
+  drawMotorForces: 1
+  randomizeSpawnOnEpisodeBegin: 1
+  maxSpawnTilt: 10
   spawnConfig:
     positionJitter: {x: 0, y: 0, z: 0}
     yBase: 5
@@ -6785,6 +7199,12 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 224135102267859126, guid: aceef1537002b5c4a8bf9f1d433d9361, type: 3}
       insertIndex: -1
       addedObject: {fileID: 910001016}
+    - targetCorrespondingSourceObject: {fileID: 224135102267859126, guid: aceef1537002b5c4a8bf9f1d433d9361, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1774341674}
+    - targetCorrespondingSourceObject: {fileID: 224135102267859126, guid: aceef1537002b5c4a8bf9f1d433d9361, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1774341673}
     - targetCorrespondingSourceObject: {fileID: 5072483314761083324, guid: aceef1537002b5c4a8bf9f1d433d9361, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1973186062}
@@ -6854,7 +7274,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1774341660}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d9702136082984bda9ea639c1faa20c3, type: 3}
   m_Name: 
@@ -6891,10 +7311,10 @@ MonoBehaviour:
     VectorActionDescriptions: []
     VectorActionSpaceType: 1
     hasUpgradedBrainParametersWithActionSpec: 1
-  m_Model: {fileID: 5022602860645237092, guid: 9018b33930c8f49538984153a9bc25dd, type: 3}
+  m_Model: {fileID: 5022602860645237092, guid: 4c42813869a36ba49a80efa0f5abf823, type: 3}
   m_InferenceDevice: 0
-  m_BehaviorType: 1
-  m_BehaviorName: DroneAgent
+  m_BehaviorType: 0
+  m_BehaviorName: DroneAgentV2
   TeamId: 0
   m_UseChildSensors: 1
   m_UseChildActuators: 1
@@ -6906,7 +7326,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1774341660}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9909748d51a5f45708d8873ba189c32b, type: 3}
   m_Name: 
@@ -6925,7 +7345,7 @@ MonoBehaviour:
   targetVelocity: {x: 0, y: 0, z: 0}
   targetTransform: {fileID: 0}
   drawMotorForces: 1
-  randomizeSpawnOnEpisodeBegin: 1
+  randomizeSpawnOnEpisodeBegin: 0
   maxSpawnTilt: 1
   spawnConfig:
     positionJitter: {x: 0, y: 0, z: 0}
@@ -6958,6 +7378,68 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   DecisionPeriod: 1
   TakeActionsBetweenDecisions: 1
+--- !u!114 &1774341673
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1774341660}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f8f05f5434f794ad69232e127e144751, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  agentParameters:
+    maxStep: 0
+  hasUpgradedFromAgentParameters: 1
+  MaxStep: 3000
+  altitudeWeight: 0.22
+  velocityWeight: 0.15
+  positionGuidanceWeight: 0.28
+  stabilityWeight: 0.22
+  driftWeight: 0.05
+  verticalPenaltyWeight: 0.05
+--- !u!114 &1774341674
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1774341660}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e12bbed67352248f29890123c0c349ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxThrustPerMotor: 7.5
+  motorPositions:
+  - {x: -0.88, y: 0.6, z: 0.88}
+  - {x: 0.88, y: 0.6, z: 0.88}
+  - {x: -0.88, y: 0.6, z: -0.88}
+  - {x: 0.88, y: 0.6, z: -0.88}
+  maxThrustDeltaRate: 2
+  motorLagTimeConstant: 0.05
+  linearDragCoeff: 0.5
+  angularDragCoeff: 2
+  motorsActive: 01010101
+  targetVelocity: {x: 0, y: 0, z: 0}
+  targetTransform: {fileID: 0}
+  drawMotorForces: 1
+  randomizeSpawnOnEpisodeBegin: 1
+  maxSpawnTilt: 10
+  spawnConfig:
+    positionJitter: {x: 0, y: 0, z: 0}
+    yBase: 5
+    yJitter: 0
+    yMin: 1.5
+    maxTiltDegrees: 10
+    randomizeYaw: 1
+    maxYawDegrees: 180
+    linearVelocityRange: {x: 0.5, y: 0.3, z: 0.5}
+    angularVelocityRange: {x: 0, y: 0, z: 0}
+    useFixedSeed: 0
+    seedValue: 0
 --- !u!1 &1786380543
 GameObject:
   m_ObjectHideFlags: 0
@@ -8131,6 +8613,68 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2039765687}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &2072143716
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 847737317}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f8f05f5434f794ad69232e127e144751, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  agentParameters:
+    maxStep: 0
+  hasUpgradedFromAgentParameters: 1
+  MaxStep: 3000
+  altitudeWeight: 0.22
+  velocityWeight: 0.15
+  positionGuidanceWeight: 0.28
+  stabilityWeight: 0.22
+  driftWeight: 0.05
+  verticalPenaltyWeight: 0.05
+--- !u!114 &2072143717
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 847737317}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e12bbed67352248f29890123c0c349ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxThrustPerMotor: 7.5
+  motorPositions:
+  - {x: -0.88, y: 0.6, z: 0.88}
+  - {x: 0.88, y: 0.6, z: 0.88}
+  - {x: -0.88, y: 0.6, z: -0.88}
+  - {x: 0.88, y: 0.6, z: -0.88}
+  maxThrustDeltaRate: 2
+  motorLagTimeConstant: 0.05
+  linearDragCoeff: 0.5
+  angularDragCoeff: 2
+  motorsActive: 01010101
+  targetVelocity: {x: 0, y: 0, z: 0}
+  targetTransform: {fileID: 0}
+  drawMotorForces: 1
+  randomizeSpawnOnEpisodeBegin: 1
+  maxSpawnTilt: 10
+  spawnConfig:
+    positionJitter: {x: 0, y: 0, z: 0}
+    yBase: 5
+    yJitter: 0
+    yMin: 1.5
+    maxTiltDegrees: 10
+    randomizeYaw: 1
+    maxYawDegrees: 180
+    linearVelocityRange: {x: 0.5, y: 0.3, z: 0.5}
+    angularVelocityRange: {x: 0, y: 0, z: 0}
+    useFixedSeed: 0
+    seedValue: 0
 --- !u!1 &2114096526
 GameObject:
   m_ObjectHideFlags: 0
