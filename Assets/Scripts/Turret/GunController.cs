@@ -7,6 +7,9 @@ public class GunController : MonoBehaviour
     public float bulletSpeed = 80f;
     public float fireRate = 3f;
 
+    [Header("Barrel Offset")]
+    public Vector3 barrelOffset = new Vector3(0.3f, -0.1f, 0.5f); // right, down, forward in camera space
+
     private float _fireCooldown;
     private Camera _cam;
 
@@ -36,20 +39,32 @@ public class GunController : MonoBehaviour
             return;
         }
 
-        Ray ray = _cam.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0f));
-        Vector3 spawnPos = ray.origin + ray.direction * 0.5f;
-        GameObject b = Instantiate(bulletPrefab, spawnPos, Quaternion.LookRotation(ray.direction));
+        // Raycast from screen center to find the actual aim target
+        Ray centerRay = _cam.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0f));
+        
+        // Find target point — either a hit surface or a far point
+        Vector3 targetPoint;
+        if (Physics.Raycast(centerRay, out RaycastHit hit, 500f))
+            targetPoint = hit.point;
+        else
+            targetPoint = centerRay.origin + centerRay.direction * 500f;
+
+        // Spawn at barrel offset position (in camera local space)
+        Vector3 spawnPos = _cam.transform.TransformPoint(barrelOffset);
+
+        // Aim from barrel toward the target point
+        Vector3 fireDir = (targetPoint - spawnPos).normalized;
+
+        GameObject b = Instantiate(bulletPrefab, spawnPos, Quaternion.LookRotation(fireDir));
         Rigidbody rb = b.GetComponent<Rigidbody>();
         if (rb != null)
-            rb.velocity = ray.direction * bulletSpeed;
+            rb.velocity = fireDir * bulletSpeed;
     }
 
     void OnGUI()
     {
-        // Use camera's actual pixel rect so crosshair is correct in split screen
         Rect pr = _cam.pixelRect;
         float cx = pr.x + pr.width * 0.5f;
-        // pixelRect Y is bottom-up; GUI Y is top-down
         float cy = Screen.height - (pr.y + pr.height * 0.5f);
         float size = 12f;
         float thickness = 2f;

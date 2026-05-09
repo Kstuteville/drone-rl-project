@@ -832,6 +832,7 @@ GameObject:
   - component: {fileID: 509282640}
   - component: {fileID: 509282642}
   - component: {fileID: 509282641}
+  - component: {fileID: 509282645}
   m_Layer: 0
   m_Name: Right
   m_TagString: Untagged
@@ -905,6 +906,7 @@ MonoBehaviour:
   bulletPrefab: {fileID: 5363653975571772103, guid: f2eb82940bf60164da60e6d1e4f66540, type: 3}
   bulletSpeed: 80
   fireRate: 3
+  barrelOffset: {x: 0.3, y: -0.1, z: 0.5}
 --- !u!114 &509282642
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -964,6 +966,15 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1587492108}
   m_LocalEulerAnglesHint: {x: 0, y: -133.419, z: 0}
+--- !u!45 &509282645
+Skybox:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 509282639}
+  m_Enabled: 1
+  m_CustomSkybox: {fileID: 2100000, guid: a073cb57491dcaf4a821ae1bc230f869, type: 2}
 --- !u!1 &615436853
 GameObject:
   m_ObjectHideFlags: 0
@@ -1130,7 +1141,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  - {fileID: 2100000, guid: 7fc7657cb72e9874688a4ca0fae01a9b, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1295,7 +1306,7 @@ GameObject:
   - component: {fileID: 791893066}
   - component: {fileID: 791893065}
   m_Layer: 0
-  m_Name: Capsule
+  m_Name: PIDGuy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1726,6 +1737,7 @@ GameObject:
   - component: {fileID: 1040311353}
   - component: {fileID: 1040311352}
   - component: {fileID: 1040311351}
+  - component: {fileID: 1040311355}
   m_Layer: 0
   m_Name: Left
   m_TagString: Untagged
@@ -1799,6 +1811,7 @@ MonoBehaviour:
   bulletPrefab: {fileID: 5363653975571772103, guid: f2eb82940bf60164da60e6d1e4f66540, type: 3}
   bulletSpeed: 80
   fireRate: 3
+  barrelOffset: {x: 0.3, y: -0.1, z: 0.5}
 --- !u!114 &1040311352
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1866,6 +1879,15 @@ Transform:
   m_Children: []
   m_Father: {fileID: 791893069}
   m_LocalEulerAnglesHint: {x: 0, y: -133.419, z: 0}
+--- !u!45 &1040311355
+Skybox:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1040311349}
+  m_Enabled: 1
+  m_CustomSkybox: {fileID: 2100000, guid: 942493cf236285a4cb5cf27507420d3a, type: 2}
 --- !u!1 &1044651652
 GameObject:
   m_ObjectHideFlags: 0
@@ -3244,7 +3266,7 @@ GameObject:
   - component: {fileID: 1587492105}
   - component: {fileID: 1587492104}
   m_Layer: 0
-  m_Name: Capsule (1)
+  m_Name: PPOGuy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3283,7 +3305,7 @@ CharacterController:
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 3
   m_Height: 2
   m_Radius: 0.5
@@ -6720,6 +6742,9 @@ MonoBehaviour:
     kP: 0.7
     kI: 0.1
     kD: 0.4
+  positionKP: 0.12
+  maxReturnTilt: 12
+  positionDeadzone: 9.8
 --- !u!114 &8710200003152695315
 MonoBehaviour:
   m_ObjectHideFlags: 0
